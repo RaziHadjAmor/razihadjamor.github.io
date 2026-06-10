@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio BUT3</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Toggle pour basculer entre jour/nuit -->
+  <div class="theme-toggle">
+    <button class="toggle-btn" id="themeToggle" aria-label="Toggle day/night mode">
+      <span class="toggle-icon">🌙</span>
+    </button>
+  </div>
+
+  <div class="container">
+  <div class="disc-1"></div>
+  <div class="disc-2"></div>
+  <div class="disc-3"></div>
+  <div class="landscape-1"></div>
+  <div class="landscape-2"></div>
+  <div class="landscape-3"></div>
+  <div class="landscape-4"></div>
+  <div class="landscape-5"></div>
+  <div class="tree-1"></div>
+  <div class="tree-2"></div>
+  <div class="tree-3"></div>
+  <div class="tree-4"></div>
+  <div class="tree-5"></div>
+  <div class="tree-6"></div>
+  <div class="tree-7"></div>
+  <div class="star s1"></div>
+  <div class="star s2"></div>
+  <div class="star s3"></div>
+  <div class="star s4"></div>
+  <div class="star s5"></div>
+  <div class="star s6"></div>
+  <div class="star s7"></div>
+  <div class="star s8"></div>
+  <div class="star s9"></div>
+  <div class="star s10"></div>
+  </div>
+  <div class="spacer"></div>
+
+  <script>
+    // Récupère les éléments
+    const themeToggle = document.getElementById('themeToggle');
+    const container = document.querySelector('.container');
+    const disc1 = document.querySelector('.disc-1');
+    const disc2 = document.querySelector('.disc-2');
+    const disc3 = document.querySelector('.disc-3');
+
+    // État du mode
+    let isDayMode = false;
+
+    // Ajoute l'événement de clic
+    themeToggle.addEventListener('click', () => {
+      isDayMode = !isDayMode;
+      themeToggle.classList.toggle('active');
+
+      if (isDayMode) {
+        // Transition vers le jour
+        container.classList.add('day-mode');
+        disc1.classList.add('animating-to-night');
+        disc2.classList.add('animating-to-night');
+        disc3.classList.add('animating-to-night');
+
+        setTimeout(() => {
+          disc1.classList.remove('animating-to-night');
+          disc2.classList.remove('animating-to-night');
+          disc3.classList.remove('animating-to-night');
+
+          themeToggle.innerHTML = '<span class="toggle-icon">☀️</span>';
+          disc1.classList.add('animating-to-day');
+          disc2.classList.add('animating-to-day');
+          disc3.classList.add('animating-to-day');
+
+          setTimeout(() => {
+            disc1.classList.remove('animating-to-day');
+            disc2.classList.remove('animating-to-day');
+            disc3.classList.remove('animating-to-day');
+          }, 2000);
+        }, 2000);
+      } else {
+        // Transition vers la nuit
+        container.classList.remove('day-mode');
+        disc1.classList.add('animating-to-night');
+        disc2.classList.add('animating-to-night');
+        disc3.classList.add('animating-to-night');
+
+        setTimeout(() => {
+          disc1.classList.remove('animating-to-night');
+          disc2.classList.remove('animating-to-night');
+          disc3.classList.remove('animating-to-night');
+
+          themeToggle.innerHTML = '<span class="toggle-icon">🌙</span>';
+          disc1.classList.add('animating-to-day');
+          disc2.classList.add('animating-to-day');
+          disc3.classList.add('animating-to-day');
+
+          setTimeout(() => {
+            disc1.classList.remove('animating-to-day');
+            disc2.classList.remove('animating-to-day');
+            disc3.classList.remove('animating-to-day');
+          }, 2000);
+        }, 2000);
+      }
+    });
+
+    const scene = document.querySelector('.container');
+    const updateParallax = (scrollY) => {
+      scene.style.setProperty('--parallax-x', `0px`);
+      scene.style.setProperty('--parallax-y', `${scrollY}px`);
+    };
+
+    const onScroll = () => {
+      const scrollOffset = window.scrollY * 0.28;
+      updateParallax(scrollOffset);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+</script>
+</body>
+</html>
