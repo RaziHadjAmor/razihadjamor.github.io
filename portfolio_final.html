@@ -1,0 +1,1951 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio BUT Informatique — Parcours & Compétences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ════════════════════════════════════════════
+   TOKENS — palette calquée sur portfolio2
+   Dark = ciel de nuit · Light = ciel de jour
+════════════════════════════════════════════ */
+[data-theme="dark"] {
+  --bg:          #01263a;
+  --bg2:         #031d2e;
+  --surface:     #072033;
+  --surface2:    #051a2b;
+  --border:      #0e3350;
+  --text:        #d4e8f5;
+  --text-2:      #7aa8c8;
+  --text-3:      #2d5a7a;
+  --accent:      #72aee6;   /* couleur de la lune */
+  --accent-bg:   rgba(114,174,230,0.12);
+  --accent-bd:   rgba(114,174,230,0.32);
+  --green:       #4ecdc4;
+  --green-bg:    rgba(78,205,196,0.12);
+  --orange:      #f9b26d;   /* couleur du soleil */
+  --orange-bg:   rgba(249,178,109,0.12);
+  --shadow:      0 2px 6px rgba(0,0,0,0.5), 0 6px 20px rgba(0,0,0,0.35);
+  --shadow-lg:   0 12px 40px rgba(0,0,0,0.6);
+  --nav-blur:    rgba(1,18,30,0.88);
+  --hero-text:   #ffffff;
+  --hero-sub:    rgba(255,255,255,0.72);
+  --hero-badge:  rgba(255,255,255,0.12);
+  --hero-badge-bd: rgba(255,255,255,0.25);
+  --github-filter: invert(1) brightness(1.5);
+}
+
+[data-theme="light"] {
+  --bg:          #fff5e6;
+  --bg2:         #fde8d0;
+  --surface:     #ffffff;
+  --surface2:    #fdf0e0;
+  --border:      #e8ceaf;
+  --text:        #2a1508;
+  --text-2:      #7a5035;
+  --text-3:      #c49060;
+  --accent:      #b8500f;   /* couleur du soleil de jour */
+  --accent-bg:   rgba(184,80,15,0.08);
+  --accent-bd:   rgba(184,80,15,0.25);
+  --green:       #5a7a1a;
+  --green-bg:    rgba(90,122,26,0.1);
+  --orange:      #c2641e;
+  --orange-bg:   rgba(194,100,30,0.1);
+  --shadow:      0 2px 6px rgba(100,50,0,0.08), 0 6px 20px rgba(100,50,0,0.06);
+  --shadow-lg:   0 12px 40px rgba(100,50,0,0.14);
+  --nav-blur:    rgba(255,245,230,0.92);
+  --hero-text:   #1a0800;
+  --hero-sub:    rgba(30,10,0,0.65);
+  --hero-badge:  rgba(30,10,0,0.08);
+  --hero-badge-bd: rgba(30,10,0,0.2);
+  --github-filter: none;
+}
+
+/* ════════════════════════════════════════════
+   RESET
+════════════════════════════════════════════ */
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Instrument Sans', sans-serif;
+  font-weight: 400;
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background 1.8s cubic-bezier(0.4,0,0.2,1), color 1.8s cubic-bezier(0.4,0,0.2,1);
+}
+a { color: var(--accent); text-decoration: none; }
+img { display: block; }
+
+/* ════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════ */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  padding: 0 40px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.4s, border-color 0.4s;
+}
+
+#nav.scrolled {
+  background: var(--nav-blur);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: -0.02em;
+  transition: color 1.8s;
+}
+[data-theme="light"] .nav-brand { color: var(--text); }
+.nav-brand span { color: var(--accent); }
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 13px;
+  border-radius: 6px;
+  color: rgba(255,255,255,0.65);
+  transition: color 0.2s, background 0.2s;
+}
+[data-theme="light"] .nav-links a { color: var(--text-2); }
+.nav-links a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+[data-theme="light"] .nav-links a:hover { color: var(--text); background: var(--bg2); }
+
+/* ════════════════════════════════════════════
+   BOUTON INTEGRATION TOGGLE (FILE: toggle_button.html)
+════════════════════════════════════════════ */
+:root {
+  /** sunny side **/
+  --blue-border: #72cce3;
+  --blue-color: #96dcee;
+  --yellow-background: #fffaa8;
+  --yellow-border: #f5eb71;
+  /** dark side **/
+  --indigo-border: #5d6baa;
+  --indigo-color: #6b7abb;
+  --gray-border: #e8e8ea;
+  --gray-dots: #e8e8ea;
+  /** general **/
+  --white: #fff;
+}
+
+.toggle-container {
+  display: flex;
+  align-items: center;
+  transform: scale(0.35); /* Réduit la taille pour l'insérer proprement dans la nav de 58px */
+  transform-origin: right center;
+}
+
+.toggle--checkbox {
+  display: none;
+}
+
+.toggle--checkbox:checked + .toggle--label {
+  background: var(--indigo-color);
+  border-color: var(--indigo-border);
+}
+.toggle--checkbox:checked + .toggle--label .toggle--label-background {
+  left: 60px;
+  width: 5px;
+}
+.toggle--checkbox:checked + .toggle--label .toggle--label-background:before {
+  width: 5px;
+  height: 5px;
+  top: -25px;
+}
+.toggle--checkbox:checked + .toggle--label .toggle--label-background:after {
+  width: 5px;
+  height: 5px;
+  left: -30px;
+  top: 20px;
+}
+.toggle--checkbox:checked + .toggle--label:before {
+  background: var(--white);
+  border-color: var(--gray-border);
+  animation-name: switch;
+  animation-duration: 150ms;
+  animation-fill-mode: forwards;
+}
+.toggle--checkbox:checked + .toggle--label:after {
+  transition-delay: 150ms;
+  opacity: 1;
+}
+.toggle--label {
+  width: 200px;
+  height: 100px;
+  background: var(--blue-color);
+  border-radius: 100px;
+  border: 5px solid var(--blue-border);
+  display: flex;
+  position: relative;
+  transition: all 350ms ease-in;
+  cursor: pointer;
+}
+.toggle--label-background {
+  width: 10px;
+  height: 5px;
+  border-radius: 5px;
+  position: relative;
+  background: var(--white);
+  left: 135px;
+  top: 45px;
+  transition: all 150ms ease-in;
+}
+.toggle--label-background:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  width: 40px;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--white);
+  left: -20px;
+  transition: all 150ms ease-in;
+}
+.toggle--label-background:after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  width: 40px;
+  height: 5px;
+  border-radius: 5px;
+  background: var(--white);
+  left: -10px;
+  transition: all 150ms ease-in;
+}
+.toggle--label:before {
+  animation-name: reverse;
+  animation-duration: 150ms;
+  animation-fill-mode: forwards;
+  transition: all 150ms ease-in;
+  content: "";
+  width: 82px;
+  height: 82px;
+  border: 5px solid var(--yellow-border);
+  top: 4px;
+  left: 4px;
+  position: absolute;
+  border-radius: 82px;
+  background: var(--yellow-background);
+}
+.toggle--label:after {
+  transition-delay: 0ms;
+  transition: all 250ms ease-in;
+  position: absolute;
+  content: "";
+  box-shadow: var(--gray-dots) -13px 0 0 2px, var(--gray-dots) -24px 14px 0 -2px;
+  left: 143px;
+  top: 23px;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+@keyframes switch {
+  0% { left: 4px; }
+  60% { left: 4px; width: 112px; }
+  100% { left: 104px; width: 82px; }
+}
+@keyframes reverse {
+  0% { left: 104px; width: 82px; }
+  60% { left: 72px; width: 112px; }
+  100% { left: 4px; }
+}
+
+/* ════════════════════════════════════════════
+   HERO SECTION
+════════════════════════════════════════════ */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+.bg-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.bg-scene::before,
+.bg-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 1.8s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ciel nuit */
+.bg-scene::before {
+  background: linear-gradient(to bottom, #01263a 0%, #4f94d4 70%, #c5d9ed 100%);
+  opacity: 1;
+}
+
+/* ciel jour */
+.bg-scene::after {
+  background: linear-gradient(to bottom, #f5a98a 0%, #f5c8a0 30%, #f5dab0 70%, #fff5e6 100%);
+  opacity: 0;
+}
+
+.bg-scene.day-mode::before { opacity: 0; }
+.bg-scene.day-mode::after { opacity: 1; }
+
+.disc-1 {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate3d(var(--parallax-x,0px), var(--parallax-y,0px), 0) translate(-50%,-50%);
+  width: 50vh; height: 50vh;
+  background: #72aee6;
+  opacity: 0.22;
+  border-radius: 50%;
+  will-change: transform;
+}
+.bg-scene.day-mode .disc-1 { background: #f9b26d; opacity: 0.2; }
+
+.disc-2 {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate3d(var(--parallax-x,0px), var(--parallax-y,0px), 0) translate(-50%,-50%);
+  width: 32vh; height: 32vh;
+  background: #9ec2e6;
+  opacity: 0.42;
+  border-radius: 50%;
+  will-change: transform;
+}
+.bg-scene.day-mode .disc-2 { background: #f7a566; opacity: 0.3; }
+
+.disc-3 {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate3d(var(--parallax-x,0px), var(--parallax-y,0px), 0) translate(-50%,-50%);
+  width: 22vh; height: 22vh;
+  background: #f0f6fc;
+  opacity: 0.65;
+  border-radius: 50%;
+  transition: background 1.8s cubic-bezier(0.4,0,0.2,1), opacity 1.8s cubic-bezier(0.4,0,0.2,1), box-shadow 1.8s;
+  will-change: transform;
+}
+.bg-scene.day-mode .disc-3 { background: #ffe0b4; opacity: 0.95; box-shadow: 0 0 90px rgba(255,166,92,0.45); }
+
+@keyframes moonDescend { from { transform: translate(-50%, -50%) translateY(0); } to { transform: translate(-50%, -50%) translateY(120vh); } }
+@keyframes sunAscend { from { transform: translate(-50%, -50%) translateY(120vh); } to { transform: translate(-50%, -50%) translateY(0); } }
+
+.disc-1.anim-down,.disc-2.anim-down,.disc-3.anim-down { animation: moonDescend 1.8s ease-in-out forwards; }
+.disc-1.anim-up,.disc-2.anim-up,.disc-3.anim-up       { animation: sunAscend   1.8s ease-in-out forwards; }
+
+.disc-1, .disc-2, .disc-3 {
+  transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.landscape-1 {
+  position: absolute; bottom: 18vh; left: -10%; width: 120%; height: 15vh;
+  background-color: #9ec2e6;
+  transform: translate3d(calc(var(--parallax-x,0px)*0.05), calc(var(--parallax-y,0px)*0.2), 0) rotate(4deg);
+  transition: background-color 1.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.bg-scene.day-mode .landscape-1 { background-color: #e69c6e; }
+
+.landscape-2 {
+  position: absolute; bottom: 14vh; left: -10%; width: 120%; height: 18vh;
+  background-color: #72aee6;
+  transform: translate3d(calc(var(--parallax-x,0px)*0.08), calc(var(--parallax-y,0px)*0.24), 0) rotate(-3deg);
+  transition: background-color 1.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.bg-scene.day-mode .landscape-2 { background-color: #ce855d; }
+
+.landscape-3 {
+  position: absolute; bottom: 9vh; left: -10%; width: 120%; height: 18vh;
+  background-color: #4f94d4;
+  transform: translate3d(calc(var(--parallax-x,0px)*0.1), calc(var(--parallax-y,0px)*0.28), 0) rotate(2deg);
+  transition: background-color 1.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.bg-scene.day-mode .landscape-3 { background-color: #b07045; }
+
+.landscape-4 {
+  position: absolute; bottom: 5vh; left: -10%; width: 120%; height: 18vh;
+  background-color: #135e96;
+  transform: translate3d(calc(var(--parallax-x,0px)*0.12), calc(var(--parallax-y,0px)*0.32), 0) rotate(-2deg);
+  transition: background-color 1.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.bg-scene.day-mode .landscape-4 { background-color: #9e6c44; }
+
+.landscape-5 {
+  position: absolute; bottom: -5vh; left: -10%; width: 120%; height: 20vh;
+  background-color: #043959;
+  transform: translate3d(calc(var(--parallax-x,0px)*0.15), calc(var(--parallax-y,0px)*0.38), 0) rotate(1deg);
+  transition: background-color 1.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform;
+}
+.bg-scene.day-mode .landscape-5 { background-color: #7c5234; }
+
+.tree-1 { position:absolute; bottom:22vh; left:30%;  width:20px; height:25px; background-color:#59a5d8; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.16),calc(var(--parallax-y,0px)*0.4),0); transition:background-color 1.8s; }
+.tree-2 { position:absolute; bottom:20vh; left:80%;  width:22px; height:30px; background-color:#4f94d4; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.17),calc(var(--parallax-y,0px)*0.45),0); transition:background-color 1.8s; }
+.tree-3 { position:absolute; bottom:18vh; left:8%;   width:25px; height:35px; background-color:#386fa4; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.18),calc(var(--parallax-y,0px)*0.5),0); transition:background-color 1.8s; }
+.tree-4 { position:absolute; bottom:14vh; left:65%;  width:30px; height:40px; background-color:#386fa4; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.19),calc(var(--parallax-y,0px)*0.52),0); transition:background-color 1.8s; }
+.tree-5 { position:absolute; bottom:11vh; left:85%;  width:35px; height:50px; background-color:#133c55; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.21),calc(var(--parallax-y,0px)*0.58),0); transition:background-color 1.8s; }
+.tree-6 { position:absolute; bottom:7vh;  left:12%;  width:45px; height:65px; background-color:#133c55; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.22),calc(var(--parallax-y,0px)*0.62),0); transition:background-color 1.8s; }
+.tree-7 { position:absolute; bottom:8vh;  left:40%;  width:40px; height:55px; background-color:#133c55; clip-path:polygon(50% 0%,22% 100%,75% 100%); transform:translate3d(calc(var(--parallax-x,0px)*0.2),calc(var(--parallax-y,0px)*0.65),0); transition:background-color 1.8s; }
+
+.bg-scene.day-mode .tree-1 { background-color:#7b5137; }
+.bg-scene.day-mode .tree-2 { background-color:#7f5231; }
+.bg-scene.day-mode .tree-3 { background-color:#8a4c2f; }
+.bg-scene.day-mode .tree-4 { background-color:#8a492d; }
+.bg-scene.day-mode .tree-5 { background-color:#8b4b2f; }
+.bg-scene.day-mode .tree-6 { background-color:#8a472b; }
+.bg-scene.day-mode .tree-7 { background-color:#8b492f; }
+
+.star {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: white;
+  border-radius: 50%;
+  transform: translate3d(calc(var(--parallax-x,0px)*0.03),calc(var(--parallax-y,0px)*0.06),0);
+  transition: opacity 1.8s cubic-bezier(0.4,0,0.2,1);
+  will-change: opacity, transform;
+}
+.bg-scene.day-mode .star { opacity: 0 !important; }
+.s1{top:10%;left:10%;} .s2{top:15%;left:45%;} .s3{top:22%;left:25%;}
+.s4{top:35%;left:80%;} .s5{top:28%;left:60%;} .s6{top:8%;left:85%;}
+.s7{top:40%;left:90%;} .s8{top:45%;left:5%;} .s9{top:12%;left:70%;}
+.s10{top:5%;left:30%;}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 70px 32px 200px;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(1,26,42,0.35) 0%, transparent 100%);
+}
+[data-theme="light"] .hero-overlay {
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,245,230,0.3) 0%, transparent 100%);
+}
+
+.hero-greeting {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-weight: 400;
+  color: var(--hero-sub);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s ease both;
+}
+
+.hero-name {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(42px, 7vw, 90px);
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  color: var(--hero-text);
+  margin-bottom: 18px;
+  min-height: 1.1em;
+  text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+}
+
+.hero-role-line {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: clamp(16px, 2.2vw, 24px);
+  font-weight: 400;
+  color: var(--hero-sub);
+  letter-spacing: -0.01em;
+  margin-bottom: 36px;
+  min-height: 1.4em;
+}
+
+.tw-cursor {
+  display: inline-block;
+  width: 3px;
+  background: var(--hero-text);
+  margin-left: 2px;
+  border-radius: 2px;
+  animation: blink-cur 1s step-end infinite;
+  vertical-align: middle;
+  height: 0.9em;
+}
+@keyframes blink-cur { 0%,100%{opacity:1} 50%{opacity:0} }
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'Instrument Sans', sans-serif;
+  padding: 11px 24px;
+  border-radius: 8px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.18s;
+}
+.btn-primary {
+  background: var(--hero-text);
+  color: #01263a;
+  border-color: var(--hero-text);
+}
+[data-theme="light"] .btn-primary { color: #fff5e6; }
+.btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+.btn-outline {
+  background: var(--hero-badge);
+  color: var(--hero-text);
+  border-color: var(--hero-badge-bd);
+  backdrop-filter: blur(8px);
+}
+.btn-outline:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.5); transform: translateY(-2px); }
+[data-theme="light"] .btn-outline:hover { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.3); }
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--hero-sub);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: fadeUp 0.6s 1.8s ease both, bobble 1.5s 1.5s ease-in-out infinite;
+}
+.scroll-line {
+  width: 1px;
+  height: 36px;
+  background: linear-gradient(to bottom, var(--hero-sub), transparent);
+  border-radius: 1px;
+}
+@keyframes bobble {
+  0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(5px)}
+}
+
+/* ════════════════════════════════════════════
+   LAYOUT UTILITAIRE
+════════════════════════════════════════════ */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+section {
+  padding: 92px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 1.8s cubic-bezier(0.4,0,0.2,1), border-color 1.8s;
+}
+section:last-of-type { border-bottom: none; }
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.section-label::before { content:''; width:22px; height:2px; background:var(--accent); border-radius:2px; }
+
+.section-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: clamp(28px, 3.5vw, 42px);
+  color: var(--text);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin-bottom: 52px;
+}
+
+/* ════════════════════════════════════════════
+   PARCOURS
+════════════════════════════════════════════ */
+#parcours { background: var(--bg); }
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-text { font-size: 15.5px; line-height: 1.85; color: var(--text-2); }
+.about-text p { margin-bottom: 18px; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-text strong { color: var(--text); font-weight: 600; }
+
+.timeline { position: relative; padding-left: 2px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 10px; top: 8px; bottom: 8px;
+  width: 1px;
+  background: var(--border);
+  transition: background 1.8s;
+}
+
+.tl-item {
+  position: relative;
+  padding-left: 34px;
+  padding-bottom: 26px;
+  transition: opacity 0.5s, transform 0.5s;
+}
+.tl-item:last-child { padding-bottom: 0; }
+
+.tl-dot {
+  position: absolute;
+  left: 4px; top: 5px;
+  width: 13px; height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  z-index: 1;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.tl-item.done .tl-dot { border-color: var(--accent); background: var(--accent); }
+.tl-item.now  .tl-dot { border-color: var(--green); background: var(--green); box-shadow: 0 0 0 5px var(--green-bg); }
+
+.tl-year {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 3px;
+}
+.tl-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.tl-sub { font-size: 13px; color: var(--text-2); line-height: 1.5; }
+
+/* ════════════════════════════════════════════
+   COMPÉTENCES
+════════════════════════════════════════════ */
+#competences { background: var(--bg2); }
+
+.comp-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--border);
+  transition: border-color 1.8s;
+}
+.comp-tab {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: 'Instrument Sans', sans-serif;
+  padding: 9px 16px;
+  border-radius: 7px 7px 0 0;
+  border: 1px solid transparent;
+  border-bottom: none;
+  cursor: pointer;
+  color: var(--text-2);
+  background: transparent;
+  transition: all 0.18s;
+  margin-bottom: -1px;
+}
+.comp-tab:hover { color: var(--text); background: var(--surface); border-color: var(--border); border-bottom-color: var(--surface); }
+.comp-tab.active { color: var(--accent); background: var(--surface); border-color: var(--border); border-bottom-color: var(--surface); }
+
+.comp-panel { display: none; }
+.comp-panel.active { display: block; animation: fadeUp 0.3s ease; }
+
+.cp-inner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 36px;
+  transition: background 1.8s, border-color 1.8s;
+}
+
+.cp-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+.cp-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}
+.cp-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+.cp-sub { font-size: 13.5px; color: var(--text-2); font-style: italic; }
+
+.cp-lvl { display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0; }
+.cp-lvl-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--text-3); }
+.level-bar { display:flex; gap:4px; }
+.level-seg { width:30px; height:6px; border-radius:3px; background:var(--border); transition:background 1.8s; }
+.level-seg.on { background: var(--accent); }
+
+.cp-body { font-size: 15px; line-height: 1.8; color: var(--text-2); margin-bottom: 24px; }
+.cp-body strong { color: var(--text); font-weight: 600; }
+
+.cp-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 22px; }
+.cp-2col.full { grid-template-columns: 1fr; }
+
+.cp-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  transition: background 1.8s, border-color 1.8s;
+}
+.cp-box-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.cp-box-title.g { color: var(--green); }
+.cp-box-title.o { color: var(--orange); }
+.cp-box-title.b { color: var(--accent); }
+
+.cp-ul { list-style: none; }
+.cp-ul li {
+  font-size: 13.5px;
+  color: var(--text-2);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+}
+.cp-ul li:last-child { border-bottom: none; }
+.cp-ul li::before { content:'·'; color:var(--text-3); font-weight:900; flex-shrink:0; }
+
+.cp-tags { display:flex; flex-wrap:wrap; gap:7px; }
+.cp-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 11px;
+  border-radius: 6px;
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-bd);
+  transition: background 1.8s, border-color 1.8s, color 1.8s;
+}
+
+/* ════════════════════════════════════════════
+   PROJETS
+════════════════════════════════════════════ */
+#projets { background: var(--bg); }
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 1.8s;
+}
+.proj-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent-bd);
+}
+
+.proj-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+.proj-icon { font-size: 28px; }
+.proj-gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 7px;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  background: var(--surface2);
+  transition: all 0.18s, background 1.8s, border-color 1.8s;
+  text-decoration: none;
+}
+.proj-gh:hover { color: var(--accent); border-color: var(--accent-bd); background: var(--accent-bg); }
+.proj-gh svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+
+.proj-ctx { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); margin-bottom: 6px; }
+.proj-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  line-height: 1.25;
+}
+.proj-desc { font-size: 13.5px; line-height: 1.75; color: var(--text-2); flex: 1; margin-bottom: 20px; }
+
+.proj-img-slot {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  background: var(--surface2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: var(--text-3);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  cursor: pointer;
+  transition: all 0.2s, background 1.8s, border-color 1.8s;
+}
+.proj-img-slot:hover { border-color: var(--accent-bd); background: var(--accent-bg); color: var(--accent); }
+.proj-img-slot svg { width: 20px; height: 20px; opacity: 0.4; }
+
+.proj-tech { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top: auto; }
+.tech-img {
+  width: 26px; height: 26px;
+  border-radius: 6px;
+  padding: 3px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  object-fit: contain;
+  transition: transform 0.15s, background 1.8s, border-color 1.8s;
+}
+.tech-img:hover { transform: scale(1.15); }
+.tech-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 6px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  transition: background 1.8s, border-color 1.8s, color 1.8s;
+}
+
+/* ════════════════════════════════════════════
+   EXPÉRIENCES
+════════════════════════════════════════════ */
+#experiences { background: var(--bg2); }
+
+.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s, background 1.8s;
+}
+.exp-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--orange));
+}
+.exp-card:hover { box-shadow: var(--shadow-lg); border-color: var(--accent-bd); }
+
+.exp-type {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-bd);
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+  transition: background 1.8s, border-color 1.8s, color 1.8s;
+}
+.exp-org {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  margin-bottom: 3px;
+}
+.exp-role { font-size: 14px; font-weight: 500; color: var(--text-2); margin-bottom: 4px; }
+.exp-period {
+  font-size: 12px;
+  color: var(--text-3);
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.exp-period::before { content:''; width:16px; height:1px; background:var(--text-3); }
+
+.exp-ul { list-style: none; margin-bottom: 18px; }
+.exp-ul li {
+  font-size: 13.5px;
+  color: var(--text-2);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  line-height: 1.55;
+}
+.exp-ul li:last-child { border-bottom: none; }
+.exp-ul li .ar { color: var(--accent); font-weight: 700; flex-shrink: 0; font-size: 12px; margin-top: 2px; }
+
+.exp-comp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.exp-comp-tag {
+  font-size: 11px; font-weight: 600;
+  padding: 3px 9px; border-radius: 6px;
+  border: 1px solid var(--border);
+  color: var(--text-2);
+  background: var(--surface2);
+  transition: all 1.8s;
+}
+
+.bilan-wrap {
+  margin-top: 40px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: background 1.8s, border-color 1.8s;
+}
+.bilan-hdr {
+  padding: 18px 28px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 1.8s;
+}
+.bilan-hdr-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+.bilan-hdr-sub { font-size: 12px; color: var(--text-3); }
+.bilan-4 { display: grid; grid-template-columns: 1fr 1fr; }
+.bilan-cell {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  transition: border-color 1.8s;
+}
+.bilan-cell:nth-child(2n) { border-right: none; }
+.bilan-cell:nth-child(3),.bilan-cell:nth-child(4) { border-bottom: none; }
+.bilan-cell-title {
+  font-size: 11px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 6px;
+}
+.bilan-cell-title.g { color: var(--green); }
+.bilan-cell-title.o { color: var(--orange); }
+.bilan-cell-title.b { color: var(--accent); }
+.bilan-ul { list-style: none; }
+.bilan-ul li {
+  font-size: 13px; color: var(--text-2);
+  padding: 5px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+  transition: border-color 1.8s;
+}
+.bilan-ul li:last-child { border-bottom: none; }
+
+/* ════════════════════════════════════════════
+   STACK TECHNIQUE
+════════════════════════════════════════════ */
+#skills { background: var(--bg); }
+
+.skill-cats { display: flex; flex-direction: column; gap: 34px; }
+
+.skill-cat-title {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.skill-cat-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+.skill-logos { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.skill-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  min-width: 72px;
+  cursor: default;
+  transition: all 0.18s, background 1.8s, border-color 1.8s;
+}
+.skill-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--accent-bd); }
+.skill-item img { width: 32px; height: 32px; object-fit: contain; }
+.skill-item .skill-name { font-size: 11px; font-weight: 600; color: var(--text-2); text-align: center; }
+
+.skill-placeholder {
+  width: 32px; height: 32px;
+  border-radius: 7px;
+  background: var(--bg2);
+  border: 1px dashed var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 800;
+  color: var(--text-3);
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.2;
+  padding: 3px;
+}
+
+img.icon-github { filter: var(--github-filter); }
+
+/* ════════════════════════════════════════════
+   CONCLUSION
+════════════════════════════════════════════ */
+#conclusion { background: var(--bg2); }
+
+.conclu-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 52px;
+}
+
+.conclu-quote {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.55;
+  padding: 22px 26px;
+  border-left: 3px solid var(--accent);
+  background: var(--surface);
+  border-radius: 0 12px 12px 0;
+  margin-bottom: 26px;
+  transition: background 1.8s, border-color 1.8s, color 1.8s;
+}
+.conclu-text { font-size: 15px; line-height: 1.85; color: var(--text-2); }
+.conclu-text p { margin-bottom: 16px; }
+.conclu-text strong { color: var(--text); font-weight: 600; }
+
+.conclu-aside { display: flex; flex-direction: column; gap: 16px; }
+.aside-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  transition: background 1.8s, border-color 1.8s;
+}
+.aside-title {
+  font-size: 11.5px; font-weight: 800;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.aside-title.g { color: var(--green); }
+.aside-title.o { color: var(--orange); }
+.aside-title.b { color: var(--accent); }
+.aside-ul { list-style: none; }
+.aside-ul li {
+  font-size: 13px; color: var(--text-2);
+  padding: 5px 0; border-bottom: 1px solid var(--border);
+  line-height: 1.5; display: flex; gap: 8px;
+  transition: border-color 1.8s;
+}
+.aside-ul li:last-child { border-bottom: none; }
+.aside-ul li::before { content:'→'; color: var(--accent); font-size:11px; flex-shrink:0; margin-top:3px; }
+
+/* ════════════════════════════════════════════
+   FOOTER
+════════════════════════════════════════════ */
+footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 36px 0;
+  transition: background 1.8s, border-color 1.8s;
+}
+.footer-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 36px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 18px; font-weight: 800; color: var(--text);
+  letter-spacing: -0.02em;
+}
+.footer-brand span { color: var(--accent); }
+.footer-meta { font-size: 12.5px; color: var(--text-3); text-align: right; line-height: 1.6; }
+
+/* ════════════════════════════════════════════
+   ANIMATIONS GLOBALES
+════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════ */
+@media (max-width: 800px) {
+  #nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .about-grid,.exp-grid,.conclu-grid { grid-template-columns: 1fr; gap: 28px; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .bilan-4 { grid-template-columns: 1fr; }
+  .bilan-cell:nth-child(1),.bilan-cell:nth-child(2) { border-right: none; }
+  .bilan-cell:nth-child(3) { border-bottom: 1px solid var(--border); }
+  .cp-2col { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-meta { text-align: center; }
+  section { padding: 64px 0; }
+  .container { padding: 0 20px; }
+  .hero-overlay { padding-bottom: 160px; }
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+</style>
+</head>
+<body>
+
+<!-- ════ NAV ════ -->
+<nav id="nav">
+  <div class="nav-brand">Razi<span>.</span>HADJ AMOR</div>
+  <ul class="nav-links">
+    <li><a href="#parcours">Parcours</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#skills">Stack</a></li>
+    <li><a href="#conclusion">Bilan</a></li>
+  </ul>
+  
+  <!-- INTEGRATION EXACTE DU CODE DE SWITCH ENVOYÉ (FILE: toggle_button.html) -->
+  <div class="toggle-container">
+    <input type="checkbox" id="toggle" class="toggle--checkbox" />
+    <label for="toggle" class="toggle--label">
+      <span class="toggle--label-background"></span>
+    </label>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section id="hero">
+
+  <div class="bg-scene" id="bgScene">
+    <div class="disc-1" id="disc1"></div>
+    <div class="disc-2" id="disc2"></div>
+    <div class="disc-3" id="disc3"></div>
+    <div class="landscape-1"></div>
+    <div class="landscape-2"></div>
+    <div class="landscape-3"></div>
+    <div class="landscape-4"></div>
+    <div class="landscape-5"></div>
+    <div class="tree-1"></div>
+    <div class="tree-2"></div>
+    <div class="tree-3"></div>
+    <div class="tree-4"></div>
+    <div class="tree-5"></div>
+    <div class="tree-6"></div>
+    <div class="tree-7"></div>
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+    <div class="star s5"></div>
+    <div class="star s6"></div>
+    <div class="star s7"></div>
+    <div class="star s8"></div>
+    <div class="star s9"></div>
+    <div class="star s10"></div>
+  </div>
+
+  <div class="hero-overlay">
+    <p class="hero-greeting">Bonjour, je m'appelle</p>
+
+    <h1 class="hero-name">
+      <span id="tw-name"></span><span class="tw-cursor" id="tw-cursor"></span>
+    </h1>
+
+    <p class="hero-role-line" id="tw-role"></p>
+
+    <div class="hero-cta">
+      <a href="#parcours" class="btn btn-primary">Mon parcours</a>
+      <a href="#projets"  class="btn btn-outline">Voir les projets</a>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Défiler</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ════ PARCOURS ════ -->
+<section id="parcours">
+  <div class="container">
+    <div class="section-label reveal">01 — Introduction</div>
+    <h2 class="section-title reveal">Mon parcours &<br>mes ambitions professionnelles</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>Mon parcours est né d'une passion pour les mathématiques. Après un <strong>DEUG puis une Licence à l'Université Sorbonne Paris Nord</strong>, j'ai choisi de m'orienter vers des études d'informatique — non pas en abandonnant les maths, mais en les mettant au service d'un domaine concret et en forte expansion et dans lequel j'aimerai me spécialiser, la <strong>data science</strong>.</p>
+        <p>Intégrer le BUT Informatique a été une décision stratégique : me confronter au développement logiciel, aux bonnes pratiques de développement allant de l'architecture, aux tests et à la maintenance du code, mais aussi aux bases de données et au travail en équipe, me permettant de compléter mes bases théoriques par de la pratique réelle. Les SAÉ, les projets avec des intervenants venant d'entreprises renommées comme <strong>THALES</strong>, et les stages au <strong><abbr title="Syndicat Interdépartemental pour l'Assainissement de l'Agglomération Parisienne">SIAAP</abbr></strong> et à l'<strong><abbr title="L'Autorité de régulation des transports">ART</abbr></strong> ont progressivement confirmé mon orientation vers l'IA et la Data.</p>
+        <p>Je poursuis en école d'ingénieur à l'<strong>ESIEA en spécialité Data & Intelligence Artificielle</strong> dès la rentrée 2026, en alternance. Mon ambition est de travailler sur des systèmes d'IA appliqués à des enjeux concrets et d'intérêt générale — mobilité, environnement, conformité réglementaire ou automatisation de processus à forte valeur métier.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="tl-item done">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2019 – 2022</div>
+          <div class="tl-title">DEUG Mathématiques</div>
+          <div class="tl-sub">USPN · Villetaneuse — Diplôme validé<br>Probabilités-statistiques, méthodes numérique, algèbre linéaire</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2022 – 2024</div>
+          <div class="tl-title">Licence Mathématiques (L3)</div>
+          <div class="tl-sub">USPN · Villetaneuse<br>Analyse, topologie, groupes et anneaux</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2024 – 2025</div>
+          <div class="tl-title">BUT 2 Passerelle Technologie de l'Information</div>
+          <div class="tl-sub">IUT de Villetaneuse · Informatique et sciences des données</div>
+        </div>
+        <div class="tl-item done">
+          <div class="tl-dot"></div>
+          <div class="tl-year">2025 – 2026</div>
+          <div class="tl-title">BUT 3 Informatique</div>
+          <div class="tl-sub">IUT de Villetaneuse</div>
+        </div>
+        <div class="tl-item now">
+          <div class="tl-dot"></div>
+          <div class="tl-year">Rentrée 2026 →</div>
+          <div class="tl-title">Cycle d'ingénieur en alternance</div>
+          <div class="tl-sub">ESIEA · Spécialité Data & Intelligence Artificielle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ COMPÉTENCES ════ -->
+<section id="competences">
+  <div class="container">
+    <div class="section-label reveal">02 — Référentiel BUT</div>
+    <h2 class="section-title reveal">Les six compétences</h2>
+
+    <div class="comp-tabs reveal" role="tablist">
+      <button class="comp-tab active" onclick="switchTab(0)">⚙️ Réaliser</button>
+      <button class="comp-tab" onclick="switchTab(1)">🚀 Optimiser</button>
+      <button class="comp-tab" onclick="switchTab(2)">🗄️ Administrer</button>
+      <button class="comp-tab" onclick="switchTab(3)">📊 Gérer</button>
+      <button class="comp-tab" onclick="switchTab(4)">🗂️ Conduire</button>
+      <button class="comp-tab" onclick="switchTab(5)">🤝 Collaborer</button>
+    </div>
+
+    <!-- C1 -->
+    <div class="comp-panel active" id="cp0">
+      <div class="cp-inner">
+        <div class="cp-top">
+          <div><div class="cp-num">Compétence 01</div><div class="cp-title">Réaliser</div><div class="cp-sub">Développer des applications, de la conception au déploiement</div></div>
+          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div></div>
+        </div>
+        <p class="cp-body">Du développement Java Servlet en BUT 1 à la création d'<strong>APIs FastAPI</strong> en Python lors de mes stages, j'ai progressivement maîtrisé l'ensemble du cycle de développement logiciel. Le projet NoSQL (simulation plateforme de livraison) m'a conduit à concevoir deux architectures back-end comparatives avec Redis et MongoDB, implémentant des communications Pub/Sub et Change Streams. Le projet THALES a consolidé mes compétences en développement orienté données avec une architecture modulaire Python. En stage au SIAAP, j'ai développé une API FastAPI complète pour l'exploitation de données environnementales.</p>
+        <div class="cp-2col">
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Maîtrise Python avancée : Pandas, FastAPI, scripting</li><li>Conception d'architectures back-end comparatives</li><li>Développement complet d'APIs REST documentées</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Mieux anticiper la dette technique dès le début</li><li>Renforcer les tests unitaires (TDD) en amont</li><li>Approfondir le développement front-end moderne</li></ul></div>
+        </div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>SAÉ Java Servlet — architecture MVC, développement application web</li><li>Projet NoSQL : plateforme de livraison Redis/MongoDB, deux back-ends comparatifs</li><li>Stage SIAAP : API FastAPI + normalisation données environnementales</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Python</span><span class="cp-tag">FastAPI</span><span class="cp-tag">Java</span><span class="cp-tag">PHP</span><span class="cp-tag">JavaScript</span><span class="cp-tag">HTML/CSS</span><span class="cp-tag">Docker</span><span class="cp-tag">TDD/JUnit</span></div>
+      </div>
+    </div>
+
+    <!-- C2 -->
+    <div class="comp-panel" id="cp1">
+      <div class="cp-inner">
+        <div class="cp-top">
+          <div><div class="cp-num">Compétence 02</div><div class="cp-title">Optimiser</div><div class="cp-sub">Proposer des applications informatiques optimisées selon des critères précis</div></div>
+          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div><div class="level-seg"></div></div></div>
+        </div>
+        <p class="cp-body">L'optimisation a été centrale dans le choix architectural Redis vs MongoDB : analyser les compromis (latence, cohérence, scalabilité) pour recommander la solution adaptée au contexte. La double culture <strong>mathématiques + informatique</strong> m'a permis d'aborder l'algorithmique avec une vision analytique rigoureuse. En stage SIAAP, la normalisation des données avec Pandas a réduit significativement les temps de traitement, et la conception de la base SQLite pour une migration PostgreSQL m'a sensibilisé à l'optimisation de schémas relationnels.</p>
+        <div class="cp-2col">
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Analyse comparative et choix argumenté de solutions</li><li>Vision mathématique de la complexité algorithmique</li><li>Optimisation de pipelines de traitement de données</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Approfondir l'optimisation bas niveau (indexing, profiling)</li><li>Formaliser davantage les benchmarks de performances</li><li>Explorer les outils de monitoring en production</li></ul></div>
+        </div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet NoSQL : benchmark Redis vs MongoDB pour la coordination logistique temps réel</li><li>Stage SIAAP : optimisation des pipelines Pandas, requêtes SQLite → PostgreSQL</li><li>Ressources maths : probabilités, analyse numérique appliquées à l'algorithmique</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Algorithmique</span><span class="cp-tag">SQL · PostgreSQL</span><span class="cp-tag">Redis</span><span class="cp-tag">Pandas</span><span class="cp-tag">Analyse numérique</span><span class="cp-tag">Complexité</span></div>
+      </div>
+    </div>
+
+    <!-- C3 -->
+    <div class="comp-panel" id="cp2">
+      <div class="cp-inner">
+        <div class="cp-top">
+          <div><div class="cp-num">Compétence 03</div><div class="cp-title">Administrer</div><div class="cp-sub">Déployer des services dans une architecture réseau</div></div>
+          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div><div class="level-seg"></div></div></div>
+        </div>
+        <p class="cp-body">La conteneurisation avec <strong>Docker</strong> a été un fil conducteur : de la mise en place d'environnements reproductibles pour les projets NoSQL jusqu'au déploiement en stage. La <strong>Nuit de l'Info</strong> (2024 et 2025) a représenté le test le plus intense de déploiement rapide en conditions réelles, avec une équipe d'une vingtaine de personnes. Jenkins, Tomcat et les pipelines CI/CD ont été abordés en cours et partiellement mis en pratique.</p>
+        <div class="cp-2col">
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Conteneurisation Docker, orchestration de services</li><li>Gestion de versions Git/GitHub en contexte professionnel</li><li>Déploiement rapide sous contrainte (Nuit de l'Info)</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Approfondir CI/CD (Jenkins, pipelines automatisés)</li><li>Renforcer les compétences réseau avancées</li><li>Explorer Kubernetes pour l'orchestration à grande échelle</li></ul></div>
+        </div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet NoSQL : conteneurisation Docker complète des services Redis et MongoDB</li><li>SAÉ Architecture réseau : configuration de services et protocoles</li><li>Nuit de l'Info 2024 & 2025 : déploiement web en conditions de hackathon nocturne</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Docker</span><span class="cp-tag">Jenkins</span><span class="cp-tag">Tomcat</span><span class="cp-tag">Git/GitHub</span><span class="cp-tag">Architecture réseau</span></div>
+      </div>
+    </div>
+
+    <!-- C4 -->
+    <div class="comp-panel" id="cp3">
+      <div class="cp-inner">
+        <div class="cp-top">
+          <div><div class="cp-num">Compétence 04</div><div class="cp-title">Gérer</div><div class="cp-sub">Concevoir et gérer des données de l'entreprise</div></div>
+          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div></div>
+        </div>
+        <p class="cp-body">La gestion des données is la compétence que je considère comme mon <strong>point d'excellence</strong>. Du projet NoSQL aux deux stages, j'ai manipulé des données dans des contextes très variés : données environnementales brutes (SIAAP), données de mobilité open data à contrôler (ART), données académiques scientifiques (THALES). La progression est nette : de la gestion de fichiers CSV vers des pipelines de traitement intégrant des <strong>LLMs pour le scoring de conformité</strong>.</p>
+        <div class="cp-2col">
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Conception de pipelines de données end-to-end</li><li>Maîtrise SQL et NoSQL (PostgreSQL, MongoDB, Redis)</li><li>Visualisation et analyse (Matplotlib, Streamlit)</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Structurer systématiquement la documentation des schémas</li><li>Approfondir les pratiques de data governance</li><li>Explorer les outils MLOps pour industrialiser les modèles</li></ul></div>
+        </div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Stage SIAAP : normalisation de données env., base SQLite → migration PostgreSQL + API FastAPI</li><li>Stage ART : pipeline de scoring LLM sur données de mobilité open data</li><li>Projet THALES : extraction et analyse de données académiques 6G, dashboard Streamlit</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">PostgreSQL · SQLite</span><span class="cp-tag">MongoDB</span><span class="cp-tag">Redis</span><span class="cp-tag">Pandas</span><span class="cp-tag">Matplotlib</span><span class="cp-tag">Streamlit</span><span class="cp-tag">Data viz</span></div>
+      </div>
+    </div>
+
+    <!-- C5 -->
+    <div class="comp-panel" id="cp4">
+      <div class="cp-inner">
+        <div class="cp-top">
+          <div><div class="cp-num">Compétence 05</div><div class="cp-title">Conduire</div><div class="cp-sub">Satisfaire les besoins des utilisateurs en gérant un projet</div></div>
+          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div></div>
+        </div>
+        <p class="cp-body">La conduite de projet a été mise en pratique dès le BUT 1 avec des SAÉ intégrant la méthodologie <strong>Agile</strong>. Le projet THALES (équipe de 4) a exigé une coordination rigoureuse avec un commanditaire industriel, des livrables définis et le respect des délais. La <strong>Nuit de l'Info</strong> représente l'expérience la plus intense : livrer un site fonctionnel en quelques heures avec ~20 personnes requiert organisation, priorisation rapide et communication permanente.</p>
+        <div class="cp-2col">
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Adaptabilité et priorisation sous contrainte de temps</li><li>Maîtrise des sprints Agile en contexte professionnel réel</li><li>Capacité à cadrer les besoins avec des commanditaires</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Mieux documenter les décisions de conception en cours</li><li>Renforcer la gestion des risques projet en amont</li><li>Structurer les rétrospectives pour capitaliser les acquis</li></ul></div>
+        </div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet THALES (×4) : coordination équipe, livrables industriels, interface commanditaire</li><li>Nuit de l'Info 2024 & 2025 (×20) : gestion de crise, priorisation extrême</li><li>Stage ART : méthodologie Agile, sprints, réunions de suivi hebdomadaires</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Agile · Scrum</span><span class="cp-tag">UML</span><span class="cp-tag">Gestion d'équipe</span><span class="cp-tag">Livrables</span><span class="cp-tag">Pack Office</span></div>
+      </div>
+    </div>
+
+    <!-- C6 -->
+    <div class="comp-panel" id="cp5">
+      <div class="cp-inner">
+        <div class="cp-top">
+          <div><div class="cp-num">Compétence 06</div><div class="cp-title">Collaborer</div><div class="cp-sub">Travailler efficacement dans une équipe informatique</div></div>
+          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div></div>
+        </div>
+        <p class="cp-body">La collaboration est une dimension naturelle de mon profil. En équipe de 4 avec THALES, en équipe d'une vingtaine lors des Nuits de l'Info, et en équipe professionnelle lors des deux stages, j'ai démontré une capacité constante à m'intégrer et à maintenir une communication fluide. L'utilisation systématique de <strong>Git/GitHub</strong>, la rédaction de documentation claire et la participation active aux réunions techniques sont mes preuves concrètes.</p>
+        <div class="cp-2col">
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Aisance relationnelle en contextes pro et académique</li><li>Documentation soignée comme acte de collaboration</li><li>Adaptabilité dans des équipes de tailles très variées</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Structurer davantage les revues de code collectives</li><li>Formaliser les conventions de nommage et de branches Git</li><li>Améliorer la gestion des conflits de merge en grande équipe</li></ul></div>
+        </div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet THALES (×4) : collaboration, revues de code, répartition des tâches</li><li>Nuit de l'Info 2024 & 2025 (×20) : coordination intensive sur 10h nocturnes</li><li>Stages SIAAP & ART : intégration équipes, réunions techniques, documentation GitHub</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Git/GitHub</span><span class="cp-tag">Documentation</span><span class="cp-tag">Travail en équipe</span><span class="cp-tag">Code review</span><span class="cp-tag">Communication technique</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ════ PROJETS ════ -->
+<section id="projets">
+  <div class="container">
+    <div class="section-label reveal">03 — Réalisations</div>
+    <h2 class="section-title reveal">Projets réalisés</h2>
+    <div class="proj-grid">
+
+      <!-- Projet 1 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="https://github.com/RaziHadjAmor/Simulation-d-une-plateforme-Uber-Eats" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('https://github.com/RaziHadjAmor/Simulation-d-une-plateforme-Uber-Eats', '_blank')">
+          <img src="assets/project_nosql.png" alt="project NoSQL" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Projet individuel · BUT 3</div>
+        <h3 class="proj-title">Simulation plateforme de livraison (NoSQL)</h3>
+        <p class="proj-desc">Conception et développement de deux architectures back-end comparatives (Redis et MongoDB) pour la coordination temps réel de flux logistiques. Implémentation de Pub/Sub, Change Streams et analyse comparative des performances.</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" alt="Redis" title="Redis">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="MongoDB" title="MongoDB">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker" title="Docker">
+        </div>
+      </div>
+
+      <!-- Projet 2 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="https://github.com/RaziHadjAmor/Web-Scraping-Articles-6G" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('https://github.com/RaziHadjAmor/Web-Scraping-Articles-6G', '_blank')">
+          <img src="assets/project_THALES.png" alt="project THALES" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Projet en équipe de 4 · Collaboration THALES</div>
+        <h3 class="proj-title">Web scraping & analyse académique 6G (THALES)</h3>
+        <p class="proj-desc">Application d'extraction automatisée et d'analyse de données académiques sur la 6G via l'API Arxiv et des LLMs (Groq). Dashboard interactif de data visualisation et scoring de pertinence des publications scientifiques.</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
+          <span class="tech-img"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit" title="Streamlit"></span>
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib" title="Matplotlib">
+          <span class="tech-badge">Groq API</span>
+          <span class="tech-badge">Arxiv API</span>
+        </div>
+      </div>
+
+      <!-- Projet 3 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="https://github.com/RaziHadjAmor/Neon_Invasion" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('https://github.com/RaziHadjAmor/Neon_Invasion', '_blank')">
+          <img src="assets/project_neon_invasion.gif" alt="Neon Invasion" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Projet individuel · BUT 3</div>
+        <h3 class="proj-title">Neon Invasion</h3>
+        <p class="proj-desc">Jeu de type shoot'em up 2D développé en Python avec Pygame intégrant une architecture orientée objet. Le joueur contrôle un vaisseau, détruit des vagues d'ennemis et collecte des power-ups.</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
+        </div>
+      </div>
+
+      <!-- Projet 4 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('', '_blank')">
+          <img src="assets/" alt="" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Projet en équipe de 4 · Collaboration THALES</div>
+        <h3 class="proj-title">Web scraping & analyse académique 6G (THALES)</h3>
+        <p class="proj-desc">Application d'extraction automatisée et d'analyse de données académiques sur la 6G via l'API Arxiv et des LLMs (Groq). Dashboard interactif de data visualisation et scoring de pertinence des publications scientifiques.</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
+          <span class="tech-badge">Groq API</span>
+          <span class="tech-badge">Arxiv API</span>
+          <span class="tech-img"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit" title="Streamlit"></span>
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib" title="Matplotlib">
+        </div>
+      </div>
+
+      <!-- Projet 5 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="https://github.com/RaziHadjAmor/Credits-Page-Nuit-de-l-info-2024" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('https://www.nuitdelinfo.com/', '_blank')">
+          <img src="assets/NI2024.jpg" alt="La Nuit de l'Info 2024" style="width:100%; height:180px; object-fit:fill; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Concours national · Équipe ~20 personnes</div>
+        <h3 class="proj-title">La Nuit de l'Info — Édition 2024</h3>
+        <p class="proj-desc">Développement d'un site web autour d'une thématique d'actualité lors d'un défi informatique national (10h nocturnes). Organisation collective sous pression extrême, créativité et résolution de problèmes en temps réel.</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git">
+        </div>
+      </div>
+
+      <!-- Projet 6 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="https://github.com/RaziHadjAmor/Defi_champ_non_ergonomique" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('https://www.nuitdelinfo.com/', '_blank')">
+          <img src="assets/NI2025.png" alt="Nuit de l'Info 2025" style="width:100%; height:180px; object-fit:fill; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Concours national · Équipe ~20 personnes</div>
+        <h3 class="proj-title">La Nuit de l'Info — Édition 2025</h3>
+        <p class="proj-desc">2e participation consécutive. Fort d'une expérience acquise en 2024, meilleure organisation, répartition des rôles améliorée et qualité technique du livrable renforcée. Application plus poussée des compétences BUT acquises.</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXPÉRIENCES ════ -->
+<section id="experiences">
+  <div class="container">
+    <div class="section-label reveal">04 — Mises en situation professionnelle</div>
+    <h2 class="section-title reveal">Stages & expériences</h2>
+    <div class="exp-grid">
+
+      <div class="exp-card reveal">
+        <div class="exp-type">Stage</div>
+        <div class="exp-org">SIAAP</div>
+        <div class="exp-role">Développeur Python & Data</div>
+        <div class="exp-period">Juillet – Août 2025 · Colombes (92)</div>
+        <ul class="exp-ul">
+          <li><span class="ar">→</span><span>Traitement et structuration de données environnementales (Excel / CSV / BDD)</span></li>
+          <li><span class="ar">→</span><span>Automatisation et normalisation des données avec Python (Pandas, Jupyter)</span></li>
+          <li><span class="ar">→</span><span>Conception d'une base SQLite en vue d'une migration vers PostgreSQL</span></li>
+          <li><span class="ar">→</span><span>Développement d'une API FastAPI pour l'exploitation des données traitées</span></li>
+          <li><span class="ar">→</span><span>Collaboration via Git/GitHub, documentation, réunions techniques</span></li>
+        </ul>
+        <div class="exp-comp-tags">
+          <span class="exp-comp-tag">Réaliser</span><span class="exp-comp-tag">Optimiser</span>
+          <span class="exp-comp-tag">Gérer</span><span class="exp-comp-tag">Collaborer</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-type">Stage BUT 3</div>
+        <div class="exp-org">ART</div>
+        <div class="exp-role">Développeur Python & LLM</div>
+        <div class="exp-period">Avril – Août 2026 · Paris Montparnasse (14e)</div>
+        <ul class="exp-ul">
+          <li><span class="ar">→</span><span>Automatisation du contrôle de conformité de données de mobilité (open data)</span></li>
+          <li><span class="ar">→</span><span>Intégration d'APIs LLM (GPT, Mistral, Perplexity) dans des pipelines Python</span></li>
+          <li><span class="ar">→</span><span>Analyse documentaire et scoring automatisé de conformité réglementaire</span></li>
+          <li><span class="ar">→</span><span>Travail en environnement Agile, sprints et livrables définis</span></li>
+          <li><span class="ar">→</span><span>Veille sur les pratiques responsables d'utilisation des LLMs en service public</span></li>
+        </ul>
+        <div class="exp-comp-tags">
+          <span class="exp-comp-tag">Réaliser</span><span class="exp-comp-tag">Gérer</span>
+          <span class="exp-comp-tag">Conduire</span><span class="exp-comp-tag">Collaborer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="bilan-wrap reveal">
+      <div class="bilan-hdr">
+        <div class="bilan-hdr-title">Analyse critique — Stage ART (stage BUT 3 principal)</div>
+        <div class="bilan-hdr-sub">Retour réflexif & auto-évaluation</div>
+      </div>
+      <div class="bilan-4">
+        <div class="bilan-cell"><div class="bilan-cell-title g">✅ Points forts</div><ul class="bilan-ul"><li>Montée en compétence rapide sur les APIs LLM en contexte réel</li><li>Livraison d'un pipeline fonctionnel en environnement Agile</li><li>Bonne intégration dans l'équipe, participation active</li><li>Application directe des compétences BUT à un problème métier concret</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title o">⚡ Points de vigilance</div><ul class="bilan-ul"><li>Sous-estimer la complexité des contraintes réglementaires du secteur public</li><li>Ne pas documenter les choix d'architecture dès les premières itérations</li><li>Gérer les limites des LLMs (hallucinations, coût, latence) en contexte critique</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title b">💡 Bonnes pratiques acquises</div><ul class="bilan-ul"><li>Tester systématiquement les sorties LLM avant intégration dans des pipelines</li><li>Itérer rapidement, documenter chaque version pour faciliter la reprise</li><li>Dialoguer tôt avec les parties prenantes pour aligner technique et métier</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title o">🎯 Si c'était à refaire…</div><ul class="bilan-ul"><li>Établir un benchmark LLM plus tôt pour choisir le modèle le mieux adapté</li><li>Proposer des tests unitaires systématiques dès le démarrage</li><li>S'imprégner plus rapidement du contexte métier (réglementation mobilité)</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ STACK TECHNIQUE ════ -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label reveal">05 — Stack technique</div>
+    <h2 class="section-title reveal">Compétences informatiques</h2>
+    <div class="skill-cats">
+
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Développement & Web</div>
+        <div class="skill-logos">
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python"><span class="skill-name">Python</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" alt="Java"><span class="skill-name">Java</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/php/php-original.svg" alt="PHP"><span class="skill-name">PHP</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg" alt="JavaScript"><span class="skill-name">JavaScript</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5"><span class="skill-name">HTML5</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3"><span class="skill-name">CSS3</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" alt="FastAPI"><span class="skill-name">FastAPI</span></div>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">Data & Bases de données</div>
+        <div class="skill-logos">
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" alt="PostgreSQL"><span class="skill-name">PostgreSQL</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" alt="SQLite"><span class="skill-name">SQLite</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg" alt="MongoDB"><span class="skill-name">MongoDB</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/redis/redis-original.svg" alt="Redis"><span class="skill-name">Redis</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/pandas/pandas-original.svg" alt="Pandas"><span class="skill-name">Pandas</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib"><span class="skill-name">Matplotlib</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jupyter/jupyter-original.svg" alt="Jupyter"><span class="skill-name">Jupyter</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit"><span class="skill-name">Streamlit</span></div>
+        </div>
+      </div>
+
+      <div class="skill-cat reveal">
+        <div class="skill-cat-title">DevOps & Outils</div>
+        <div class="skill-logos">
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" alt="Docker"><span class="skill-name">Docker</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git"><span class="skill-name">Git</span></div>
+          <div class="skill-item"><img class="icon-github" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" alt="GitHub"><span class="skill-name">GitHub</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/jenkins/jenkins-original.svg" alt="Jenkins"><span class="skill-name">Jenkins</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tomcat/tomcat-original.svg" alt="Tomcat"><span class="skill-name">Tomcat</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code"><span class="skill-name">VS Code</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" alt="IntelliJ"><span class="skill-name">IntelliJ</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONCLUSION ════ -->
+<section id="conclusion">
+  <div class="container">
+    <div class="section-label reveal">06 — Synthèse finale</div>
+    <h2 class="section-title reveal">Bilan & perspectives</h2>
+    <div class="conclu-grid">
+      <div>
+        <div class="conclu-quote reveal">
+          « Trois années de BUT m'ont appris que la technique seule ne suffit pas — c'est la capacité à mettre la donnée au service d'un problème réel, en collaboration, qui fait la valeur d'un ingénieur. »
+        </div>
+        <div class="conclu-text reveal">
+          <p>Ce portfolio marque la clôture d'un cycle fondateur. En parcourant les six compétences du référentiel BUT, je mesure le chemin parcouru : d'un étudiant en mathématiques théoriques à un développeur capable de concevoir des <strong>pipelines de données</strong>, d'intégrer des <strong>LLMs dans des systèmes réels</strong>, et de collaborer efficacement dans des environnements professionnels exigeants.</p>
+          <p>Les points forts identifiés : une solide maîtrise de Python et de l'écosystème data, une capacité d'adaptation rapide à de nouveaux contextes métiers, et un relationnel facilitant la collaboration interdisciplinaire. Ma <strong>double culture mathématiques–informatique</strong> constitue un différenciateur réel pour aborder les problématiques d'IA.</p>
+          <p>Les axes de progression me guideront à l'ESIEA : investir davantage dans les tests et la documentation dès le début des projets, approfondir les aspects bas niveau de l'optimisation, et renforcer ma culture <strong>MLOps</strong> pour industrialiser les modèles au-delà du prototype. Ce portfolio n'est pas une fin — c'est la base sur laquelle construire la suite.</p>
+        </div>
+      </div>
+      <div class="conclu-aside">
+        <div class="aside-card reveal">
+          <div class="aside-title g">Points forts identifiés</div>
+          <ul class="aside-ul">
+            <li>Double culture maths / informatique</li>
+            <li>Maîtrise Python & écosystème data end-to-end</li>
+            <li>Expérience LLMs en contexte professionnel (ART)</li>
+            <li>Capacité d'intégration rapide en équipe</li>
+            <li>Rigueur & curiosité intellectuelle</li>
+          </ul>
+        </div>
+        <div class="aside-card reveal">
+          <div class="aside-title o">Axes d'amélioration</div>
+          <ul class="aside-ul">
+            <li>Approfondir CI/CD & pratiques MLOps</li>
+            <li>Tests unitaires systématiques dès le démarrage</li>
+            <li>Documentation d'architecture en temps réel</li>
+            <li>Renforcer le front-end (React, frameworks modernes)</li>
+          </ul>
+        </div>
+        <div class="aside-card reveal">
+          <div class="aside-title b">Perspectives</div>
+          <ul class="aside-ul">
+            <li>ESIEA — Ingénieur Data & IA (alternance 2026)</li>
+            <li>IA appliquée : mobilité, environnement, conformité</li>
+            <li>Contribuer à des projets IA à fort impact métier</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ FOOTER ════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">portfolio<span>.</span>but3</div>
+    <div class="footer-meta">
+      BUT 3 Informatique — USPN · IUT de Villetaneuse<br>
+      Cours Communication & Projet Professionnel · Remis le 14 juin 2026
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   PERSONNALISATION — À MODIFIER
+══════════════════════════════════════════ */
+const HERO_NAME = "Razi HADJ AMOR";
+const HERO_ROLE = "Étudiant en BUT3 Informatique";
+
+/* ══════════════════════════════════════════
+   THÈME JOUR / NUIT CONSERVÉ (AVEC NOUVEAU TOGGLE CHECKBOX)
+══════════════════════════════════════════ */
+const html     = document.documentElement;
+const bgScene  = document.getElementById('bgScene');
+const disc1    = document.getElementById('disc1');
+const disc2    = document.getElementById('disc2');
+const disc3    = document.getElementById('disc3');
+const toggleCb = document.getElementById('toggle'); // On récupère le nouveau checkbox
+
+let isDay = false;
+let animLock = false;
+
+function setTheme(day) {
+  if (animLock) return;
+  animLock = true;
+
+  const discs = [disc1, disc2, disc3];
+
+  applyTheme(day);
+
+  discs.forEach(d => d.classList.add('anim-down'));
+
+  setTimeout(() => {
+    discs.forEach(d => d.classList.remove('anim-down'));
+    discs.forEach(d => d.classList.add('anim-up'));
+
+    setTimeout(() => {
+      discs.forEach(d => d.classList.remove('anim-up'));
+      animLock = false;
+    }, 1800);
+
+  }, 1800);
+}
+
+function applyTheme(day) {
+  isDay = day;
+  if (day) {
+    html.setAttribute('data-theme', 'light');
+    bgScene.classList.add('day-mode');
+    toggleCb.checked = false; // Synchronise l'état graphique du bouton (décoché = jour)
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    bgScene.classList.remove('day-mode');
+    toggleCb.checked = true;  // Synchronise l'état graphique du bouton (coché = nuit)
+  }
+  localStorage.setItem('pf-theme', day ? 'light' : 'dark');
+}
+
+// On écoute le changement d'état du nouveau checkbox
+toggleCb.addEventListener('change', () => {
+  // checked === true signifie qu'on passe en nuit, donc isDay devient false
+  setTheme(!toggleCb.checked);
+});
+
+// Init direct sans animation
+const saved = localStorage.getItem('pf-theme');
+if (saved === 'dark') {
+  applyTheme(false);
+} else {
+  applyTheme(true); // par défaut JOUR
+}
+
+/* ══════════════════════════════════════════
+   PARALLAXE (scroll)
+══════════════════════════════════════════ */
+function onScroll() {
+  const y = window.scrollY * 0.28;
+  bgScene.style.setProperty('--parallax-x', '0px');
+  bgScene.style.setProperty('--parallax-y', y + 'px');
+}
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
+
+/* ══════════════════════════════════════════
+   NAV : opacité au scroll
+══════════════════════════════════════════ */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+/* ══════════════════════════════════════════
+   TYPEWRITER
+══════════════════════════════════════════ */
+const twName   = document.getElementById('tw-name');
+const twRole   = document.getElementById('tw-role');
+const twCursor = document.getElementById('tw-cursor');
+
+function typeWriter(el, text, speed, onDone) {
+  let i = 0;
+  el.textContent = '';
+  function tick() {
+    if (i < text.length) {
+      el.textContent += text[i++];
+      setTimeout(tick, speed);
+    } else {
+      onDone && onDone();
+    }
+  }
+  tick();
+}
+
+setTimeout(() => {
+  typeWriter(twName, HERO_NAME, 75, () => {
+    setTimeout(() => {
+      twCursor.style.display = 'none';
+      setTimeout(() => {
+        twCursor.style.display = '';
+        typeWriter(twRole, HERO_ROLE, 35, () => {});
+      }, 100);
+    }, 400);
+  });
+}, 900);
+
+/* ══════════════════════════════════════════
+   INTERSECTION OBSERVER (reveals)
+══════════════════════════════════════════ */
+const ioOpts = { threshold: 0.08, rootMargin: '0px 0px -50px 0px' };
+
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, ioOpts);
+
+document.querySelectorAll('.reveal, .tl-item, .proj-card, .exp-card,\
+  .skill-cat, .aside-card').forEach(el => {
+  if (!el.classList.contains('reveal')) el.classList.add('reveal');
+  revealObs.observe(el);
+});
+
+/* Stagger pour grilles */
+const staggerObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const children = e.target.querySelectorAll('.proj-card, .exp-card, .aside-card, .skill-item');
+      children.forEach((c, i) => {
+        c.style.transitionDelay = (i * 0.07) + 's';
+        c.classList.add('visible');
+      });
+      staggerObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05 });
+
+document.querySelectorAll('.proj-grid, .exp-grid, .conclu-aside, .skill-logos').forEach(el => {
+  staggerObs.observe(el);
+});
+
+/* ══════════════════════════════════════════
+   TABS COMPÉTENCES
+══════════════════════════════════════════ */
+function switchTab(idx) {
+  document.querySelectorAll('.comp-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.comp-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+}
+
+/* ══════════════════════════════════════════
+   NAV : lien actif au scroll
+══════════════════════════════════════════ */
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  navLinks.forEach(a => {
+    const active = a.getAttribute('href') === '#' + cur;
+    a.style.color = active ? 'var(--accent)' : '';
+  });
+}, { passive: true });
+
+function alertImg() {
+  alert('💡 Pour ajouter une image, remplacez ce bloc par :\n\n<img src="votre-capture.png" alt="..." style="width:100%; height:130px; object-fit:cover; border-radius:8px; margin-bottom:20px;">');
+}
+</script>
+</body>
+</html>

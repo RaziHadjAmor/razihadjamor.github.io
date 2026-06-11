@@ -4,7 +4,453 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio BUT3</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #0a4b78;
+  overflow-x: hidden; /* Évite le scroll horizontal à cause de la rotation des paysages */
+}
+
+/* --- TOGGLE JOUR/NUIT --- */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toggle-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 2s ease;
+  backdrop-filter: blur(10px);
+}
+
+.toggle-btn:hover {
+  border-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.toggle-icon {
+  display: inline-block;
+  transition: transform 2s ease;
+}
+
+.toggle-btn.active .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Le conteneur prend maintenant TOUT l'écran */
+.container {
+  width: 100vw;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  perspective: 1600px;
+  perspective-origin: 50% 35%;
+  --parallax-x: 0px;
+  --parallax-y: 0px;
+}
+
+.spacer {
+  height: 180vh;
+  width: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.12) 100%);
+}
+
+.container::before,
+.container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.container::before {
+  background: linear-gradient(to bottom, #01263a 0%, #4f94d4 70%, #c5d9ed 100%);
+  opacity: 1;
+}
+
+.container::after {
+  background: linear-gradient(to bottom, #ffb37d 0%, #f7a76b 30%, #f3c998 70%, #fff1df 100%);
+  opacity: 0;
+}
+
+.container.day-mode::before {
+  opacity: 0;
+}
+
+.container.day-mode::after {
+  opacity: 1;
+}
+
+/* --- ANIMATIONS JOUR/NUIT --- */
+@keyframes moonDescend {
+  0% {
+    top: 50%;
+  }
+  100% {
+    top: 120%;
+  }
+}
+
+@keyframes sunAscend {
+  0% {
+    top: 120%;
+  }
+  100% {
+    top: 50%;
+  }
+}
+
+@keyframes skyToDay {
+  0% {
+    background: linear-gradient(to bottom, #01263a 0%, #4f94d4 70%, #c5d9ed 100%);
+  }
+  100% {
+    background: linear-gradient(to bottom, #f5a98a 0%, #f5c8a0 30%, #f5dab0 70%, #fff5e6 100%);
+  }
+}
+
+@keyframes skyToNight {
+  0% {
+    background: linear-gradient(to bottom, #f5a98a 0%, #f5c8a0 30%, #f5dab0 70%, #fff5e6 100%);
+  }
+  100% {
+    background: linear-gradient(to bottom, #01263a 0%, #4f94d4 70%, #c5d9ed 100%);
+  }
+}
+
+/* --- LE SOLEIL / LUNE (Centré et responsive) --- */
+.disc-1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(var(--parallax-x), var(--parallax-y), 0) translate(-50%, -50%);
+  width: 50vh;
+  height: 50vh;
+  background: #72aee6;
+  opacity: 0.2;
+  border-radius: 50%;
+  transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: top, transform, opacity, background;
+}
+
+.disc-1.animating-to-night {
+  animation: moonDescend 2s ease-in-out forwards;
+}
+
+.disc-1.animating-to-day {
+  animation: sunAscend 2s ease-in-out forwards;
+}
+
+.container.day-mode .disc-1 {
+  background: #f9b26d;
+  opacity: 0.18;
+}
+
+.disc-2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(var(--parallax-x), var(--parallax-y), 0) translate(-50%, -50%);
+  width: 32vh;
+  height: 32vh;
+  background: #9ec2e6;
+  opacity: 0.4;
+  border-radius: 50%;
+  transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: top, transform, opacity, background;
+}
+
+.disc-2.animating-to-night {
+  animation: moonDescend 2s ease-in-out forwards;
+}
+
+.disc-2.animating-to-day {
+  animation: sunAscend 2s ease-in-out forwards;
+}
+
+.container.day-mode .disc-2 {
+  background: #f7a566;
+  opacity: 0.28;
+}
+
+.disc-3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(var(--parallax-x), var(--parallax-y), 0) translate(-50%, -50%);
+  width: 22vh;
+  height: 22vh;
+  border-radius: 50%;
+  background: #f0f6fc;
+  opacity: 0.6;
+  transition: background 1.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: top, transform, opacity, background, box-shadow;
+}
+
+.disc-3.animating-to-night {
+  animation: moonDescend 2s ease-in-out forwards;
+}
+
+.disc-3.animating-to-day {
+  animation: sunAscend 2s ease-in-out forwards;
+}
+
+.container.day-mode .disc-3 {
+  background: #ffe0b4;
+  opacity: 0.9;
+  box-shadow: 0 0 90px rgba(255, 166, 92, 0.4);
+}
+
+/* --- LES PAYSAGES (S'étirent sur toute la largeur) --- */
+/* On utilise width: 120% et left: -10% pour que les bords dépassent de l'écran et cachent les trous dus à la rotation */
+.landscape-1 {
+  position: absolute;
+  bottom: 18vh;
+  left: -10%;
+  width: 120%;
+  height: 15vh;
+  background-color: #9ec2e6;
+  transform: translate3d(calc(var(--parallax-x) * 0.05), calc(var(--parallax-y) * 0.2), 0) rotate(4deg);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .landscape-1 {
+  background-color: #e69c6e;
+}
+
+.landscape-2 {
+  position: absolute;
+  bottom: 14vh;
+  left: -10%;
+  width: 120%;
+  height: 18vh;
+  background-color: #72aee6;
+  transform: translate3d(calc(var(--parallax-x) * 0.08), calc(var(--parallax-y) * 0.24), 0) rotate(-3deg);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .landscape-2 {
+  background-color: #ce855d;
+}
+
+.landscape-3 {
+  position: absolute;
+  bottom: 9vh;
+  left: -10%;
+  width: 120%;
+  height: 18vh;
+  background-color: #4f94d4;
+  transform: translate3d(calc(var(--parallax-x) * 0.1), calc(var(--parallax-y) * 0.28), 0) rotate(2deg);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .landscape-3 {
+  background-color: #b07045;
+}
+
+.landscape-4 {
+  position: absolute;
+  bottom: 5vh;
+  left: -10%;
+  width: 120%;
+  height: 18vh;
+  background-color: #135e96;
+  transform: translate3d(calc(var(--parallax-x) * 0.12), calc(var(--parallax-y) * 0.32), 0) rotate(-2deg);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .landscape-4 {
+  background-color: #9e6c44;
+}
+
+.landscape-5 {
+  position: absolute;
+  bottom: -5vh;
+  left: -10%;
+  width: 120%;
+  height: 20vh;
+  background-color: #043959;
+  transform: translate3d(calc(var(--parallax-x) * 0.15), calc(var(--parallax-y) * 0.38), 0) rotate(1deg);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .landscape-5 {
+  background-color: #7c5234;
+}
+
+/* --- LES ARBRES (Tandis que la hauteur reste fixe/adaptable, le placement est en %) --- */
+.tree-1 {
+  position: absolute;
+  bottom: 22vh;
+  left: 30%;
+  height: 25px;
+  width: 20px;
+  background-color: #59a5d8;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.16), calc(var(--parallax-y) * 0.4), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-1 {
+  background-color: #7b5137;
+}
+
+.tree-2 {
+  position: absolute;
+  bottom: 20vh;
+  left: 80%;
+  height: 30px;
+  width: 22px;
+  background-color: #4f94d4;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.17), calc(var(--parallax-y) * 0.45), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-2 {
+  background-color: #7f5231;
+}
+
+.tree-3 {
+  position: absolute;
+  bottom: 18vh;
+  left: 8%;
+  height: 35px;
+  width: 25px;
+  background-color: #386fa4;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.18), calc(var(--parallax-y) * 0.5), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-3 {
+  background-color: #8a4c2f;
+}
+
+.tree-4 {
+  position: absolute;
+  bottom: 14vh;
+  left: 65%;
+  height: 40px;
+  width: 30px;
+  background-color: #386fa4;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.19), calc(var(--parallax-y) * 0.52), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-4 {
+  background-color: #8a492d;
+}
+
+.tree-5 {
+  position: absolute;
+  bottom: 11vh;
+  left: 85%;
+  height: 50px;
+  width: 35px;
+  background-color: #133c55;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.21), calc(var(--parallax-y) * 0.58), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-5 {
+  background-color: #8b4b2f;
+}
+
+.tree-6 {
+  position: absolute;
+  bottom: 7vh;
+  left: 12%;
+  height: 65px;
+  width: 45px;
+  background-color: #133c55;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.22), calc(var(--parallax-y) * 0.62), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-6 {
+  background-color: #8a472b;
+}
+
+.tree-7 {
+  position: absolute;
+  bottom: 8vh;
+  left: 40%;
+  height: 55px;
+  width: 40px;
+  background-color: #133c55;
+  clip-path: polygon(50% 0%, 22% 100%, 75% 100%);
+  transform: translate3d(calc(var(--parallax-x) * 0.2), calc(var(--parallax-y) * 0.65), 0);
+  transition: background-color 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, background-color;
+}
+
+.container.day-mode .tree-7 {
+  background-color: #8b492f;
+}
+
+/* --- LES ÉTOILES (Placées en % pour couvrir tout le ciel) --- */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background-color: white;
+  border-radius: 50%;
+  opacity: 1;
+  transform: translate3d(calc(var(--parallax-x) * 0.03), calc(var(--parallax-y) * 0.06), 0);
+  transition: opacity 1.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.container.day-mode .star {
+  opacity: 0;
+}
+
+.s1  { top: 10%; left: 10%; }
+.s2  { top: 15%; left: 45%; }
+.s3  { top: 22%; left: 25%; }
+.s4  { top: 35%; left: 80%; }
+.s5  { top: 28%; left: 60%; }
+.s6  { top: 8%;  left: 85%; }
+.s7  { top: 40%; left: 90%; }
+.s8  { top: 45%; left: 5%; }
+.s9  { top: 12%; left: 70%; }
+.s10 { top: 5%;  left: 30%; }
+  </style>
 </head>
 <body>
   <!-- Toggle pour basculer entre jour/nuit -->
