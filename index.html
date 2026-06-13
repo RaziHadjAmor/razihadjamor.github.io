@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio BUT Informatique — Parcours & Compétences</title>
+<title>Razi HADJ AMOR | Portfolio</title>
+<link rel="icon" type="image/png" href="assets/favicon.ico "/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -134,8 +135,123 @@ img { display: block; }
 .nav-links a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 [data-theme="light"] .nav-links a:hover { color: var(--text); background: var(--bg2); }
 
+/* Conteneur global de la liste */
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+/* Création de l'écart avec le reste des liens textuels */
+.nav-social-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;          /* Espacement serré entre les 3 icônes */
+  margin-left: 30px;  /* Grand écartement par rapport à "Contact" */
+  border-left: 1px solid var(--border); /* Optionnel : petite barre de séparation */
+  padding-left: 16px;
+}
+
+.nav-links .nav-icon-li {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Style des SVGs de la nav bar */
+.nav-links .nav-svg {
+  width: 20px;
+  height: 20px;
+  fill: rgba(255, 255, 255, 0.65);
+  transition: fill 0.2s, transform 0.2s;
+}
+
+[data-theme="light"] .nav-links .nav-svg {
+  fill: var(--text-2);
+}
+
+.nav-links .nav-svg:hover {
+  fill: var(--accent);
+  transform: translateY(-2.5px);
+}
+
 /* ════════════════════════════════════════════
-   BOUTON INTEGRATION TOGGLE (FILE: toggle_button.html)
+   CONTACT & CV
+════════════════════════════════════════════ */
+#contact {
+  background: var(--bg);
+  text-align: center;
+}
+
+.contact-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.contact-desc {
+  font-size: 16px;
+  color: var(--text-2);
+  margin-bottom: 32px;
+  line-height: 1.8;
+}
+
+.contact-desc strong {
+  color: var(--accent);
+}
+
+.contact-grid {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+
+/* Version spéciale du bouton pour le CV */
+.btn-cv {
+  background: linear-gradient(135deg, var(--accent), var(--accent));
+  color: #01263a !important;
+  font-weight: 700;
+  padding: 14px 32px;
+  font-size: 15px;
+  border-radius: 50px;
+  box-shadow: 0 4px 15px rgba(78, 205, 196, 0.25);
+}
+.btn-cv:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(78, 205, 196, 0.4);
+  opacity: 0.95;
+}
+
+[data-theme="light"] .btn-cv {
+  color: #ffffff !important;
+}
+
+.btn-contact-text {
+  border-radius: 50px;
+  height: 46px;
+}
+
+.btn-contact-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 !important;
+}
+
+.btn-contact-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--text);
+  transition: fill 0.2s;
+}
+
+.btn-contact-icon:hover svg {
+  fill: var(--accent);
+}
+/* ════════════════════════════════════════════
+   BOUTON INTEGRATION TOGGLE 
 ════════════════════════════════════════════ */
 :root {
   /** sunny side **/
@@ -424,6 +540,24 @@ img { display: block; }
 .bg-scene.day-mode .tree-5 { background-color:#8b4b2f; }
 .bg-scene.day-mode .tree-6 { background-color:#8a472b; }
 .bg-scene.day-mode .tree-7 { background-color:#8b492f; }
+
+.shooting-star {
+  position: absolute;
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,1), rgba(255,255,255,0));
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* L'animation ne gère plus la position, juste le mouvement de glisse et de fondu */
+@keyframes shootAnimation {
+  0% { transform: translate(0, 0) rotate(-30deg); opacity: 0; }
+  10% { opacity: 1; }
+  30% { transform: translate(-300px, 150px) rotate(-30deg); opacity: 0; }
+  100% { transform: translate(-300px, 150px) rotate(-30deg); opacity: 0; }
+}
 
 .star {
   position: absolute;
@@ -740,9 +874,6 @@ section:last-of-type { border-bottom: none; }
 
 .cp-lvl { display:flex; flex-direction:column; align-items:flex-end; gap:5px; flex-shrink:0; }
 .cp-lvl-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--text-3); }
-.level-bar { display:flex; gap:4px; }
-.level-seg { width:30px; height:6px; border-radius:3px; background:var(--border); transition:background 1.8s; }
-.level-seg.on { background: var(--accent); }
 
 .cp-body { font-size: 15px; line-height: 1.8; color: var(--text-2); margin-bottom: 24px; }
 .cp-body strong { color: var(--text); font-weight: 600; }
@@ -1065,9 +1196,10 @@ section:last-of-type { border-bottom: none; }
   border: 1px solid var(--border);
   min-width: 72px;
   cursor: default;
-  transition: all 0.18s, background 1.8s, border-color 1.8s;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background 1.8s, border-color 1.8s, box-shadow 0.2s !important;
+  will-change: transform;
 }
-.skill-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--accent-bd); }
+.skill-item:hover { transform: translateY(-5px) scale(1.05) !important; box-shadow: var(--shadow-lg); border-color: var(--accent-bd); }
 .skill-item img { width: 32px; height: 32px; object-fit: contain; }
 .skill-item .skill-name { font-size: 11px; font-weight: 600; color: var(--text-2); text-align: center; }
 
@@ -1214,6 +1346,28 @@ footer {
     <li><a href="#experiences">Expériences</a></li>
     <li><a href="#skills">Stack</a></li>
     <li><a href="#conclusion">Bilan</a></li>
+    <li><a href="#contact">Contact</a></li>
+
+    <div class="nav-social-group">
+      <!-- Icône Mail -->
+      <li class="nav-icon-li">
+        <a href="mailto:razi.hadjamor@gmail.com" aria-label="Mail">
+          <svg class="nav-svg" viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+        </a>
+      </li>
+      <!-- Icône LinkedIn -->
+      <li class="nav-icon-li">
+        <a href="https://linkedin.com/in/razi-hadjamor" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg class="nav-svg" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+      </li>
+      <!-- Icône GitHub -->
+      <li class="nav-icon-li">
+        <a href="https://github.com/RaziHadjAmor" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg class="nav-svg" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.8 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </li>
+    </div>
   </ul>
   
   <!-- INTEGRATION EXACTE DU CODE DE SWITCH ENVOYÉ (FILE: toggle_button.html) -->
@@ -1244,6 +1398,7 @@ footer {
     <div class="tree-5"></div>
     <div class="tree-6"></div>
     <div class="tree-7"></div>
+    <div class="shooting-star" id="shootingStar"></div>
     <div class="star s1"></div>
     <div class="star s2"></div>
     <div class="star s3"></div>
@@ -1287,7 +1442,7 @@ footer {
       <div class="about-text reveal">
         <p>Mon parcours est né d'une passion pour les mathématiques. Après un <strong>DEUG puis une Licence à l'Université Sorbonne Paris Nord</strong>, j'ai choisi de m'orienter vers des études d'informatique — non pas en abandonnant les maths, mais en les mettant au service d'un domaine concret et en forte expansion et dans lequel j'aimerai me spécialiser, la <strong>data science</strong>.</p>
         <p>Intégrer le BUT Informatique a été une décision stratégique : me confronter au développement logiciel, aux bonnes pratiques de développement allant de l'architecture, aux tests et à la maintenance du code, mais aussi aux bases de données et au travail en équipe, me permettant de compléter mes bases théoriques par de la pratique réelle. Les SAÉ, les projets avec des intervenants venant d'entreprises renommées comme <strong>THALES</strong>, et les stages au <strong><abbr title="Syndicat Interdépartemental pour l'Assainissement de l'Agglomération Parisienne">SIAAP</abbr></strong> et à l'<strong><abbr title="L'Autorité de régulation des transports">ART</abbr></strong> ont progressivement confirmé mon orientation vers l'IA et la Data.</p>
-        <p>Je poursuis en école d'ingénieur à l'<strong>ESIEA en spécialité Data & Intelligence Artificielle</strong> dès la rentrée 2026, en alternance. Mon ambition est de travailler sur des systèmes d'IA appliqués à des enjeux concrets et d'intérêt générale — mobilité, environnement, conformité réglementaire ou automatisation de processus à forte valeur métier.</p>
+        <p>Je poursuis en école d'ingénieur à l'<strong>ESIEA en spécialité Data & Intelligence Artificielle</strong> dès la rentrée 2026, en alternance. Mon ambition est de travailler sur des systèmes d'IA appliqués à des enjeux concrets et d'intérêt général — mobilité, environnement, conformité réglementaire ou automatisation de processus à forte valeur métier.</p>
       </div>
 
       <div class="timeline reveal">
@@ -1326,7 +1481,7 @@ footer {
   </div>
 </section>
 
-<!-- ════ COMPÉTENCES ════ -->
+<!-- ════ COMPÉTENCES ════ --> 
 <section id="competences">
   <div class="container">
     <div class="section-label reveal">02 — Référentiel BUT</div>
@@ -1341,105 +1496,153 @@ footer {
       <button class="comp-tab" onclick="switchTab(5)">🤝 Collaborer</button>
     </div>
 
-    <!-- C1 -->
+    <!-- C1 : RÉALISER -->
     <div class="comp-panel active" id="cp0">
       <div class="cp-inner">
         <div class="cp-top">
-          <div><div class="cp-num">Compétence 01</div><div class="cp-title">Réaliser</div><div class="cp-sub">Développer des applications, de la conception au déploiement</div></div>
-          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div></div>
+          <div>
+            <div class="cp-num">Compétence 01</div>
+            <div class="cp-title">Réaliser</div>
+            <div class="cp-sub">Développer des applications, de la conception au déploiement</div>
+          </div>
+          <div class="cp-lvl">
+            <div class="cp-lvl-lbl">Moyenne globale : 14,31/20</div>
+            <div class="cp-lvl-lbl" style="color: var(--green); font-weight: 700;">Rang : 8 / 81</div>
+            <div class="level-bar" style="margin-top: 5px;"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div>
+          </div>
         </div>
-        <p class="cp-body">Du développement Java Servlet en BUT 1 à la création d'<strong>APIs FastAPI</strong> en Python lors de mes stages, j'ai progressivement maîtrisé l'ensemble du cycle de développement logiciel. Le projet NoSQL (simulation plateforme de livraison) m'a conduit à concevoir deux architectures back-end comparatives avec Redis et MongoDB, implémentant des communications Pub/Sub et Change Streams. Le projet THALES a consolidé mes compétences en développement orienté données avec une architecture modulaire Python. En stage au SIAAP, j'ai développé une API FastAPI complète pour l'exploitation de données environnementales.</p>
+        <p class="cp-body">Cette compétence valide ma maîtrise du cycle de développement logiciel, de la conception orientée objet aux architectures Web et mobile. En s'appuyant sur les bases de la programmation Web back-end en Java avec Tomcat (R5.A.05), j'ai évolué vers des paradigmes modernes en Python (POO, FastAPI, SQLAlchemy en R6.A.05). L'application mobile <strong>SerendIA</strong> (Flutter/Android Studio) et le développement de mon "chef-d'œuvre" <strong>Neon Invasion</strong> (jeu 2D exploitant Pygame, la gestion des couleurs et des images bitmap/vectorielles en R5.A.06) constituent mes principales traces de réalisation concrète.</p>
         <div class="cp-2col">
-          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Maîtrise Python avancée : Pandas, FastAPI, scripting</li><li>Conception d'architectures back-end comparatives</li><li>Développement complet d'APIs REST documentées</li></ul></div>
-          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Mieux anticiper la dette technique dès le début</li><li>Renforcer les tests unitaires (TDD) en amont</li><li>Approfondir le développement front-end moderne</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Architecture Web backend et APIs REST (Java Servlet, FastAPI)</li><li>Programmation orientée objet et multimédia (Java, Python, Pygame)</li><li>Développement d'interfaces modulaires "mobile-first"</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Approfondir la gestion de la maintenance applicative (R6.A.06)</li><li>Prendre garde à l'architecture du code en respectant les bons principes de développement (Principes SOLID)</li></ul></div>
         </div>
-        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>SAÉ Java Servlet — architecture MVC, développement application web</li><li>Projet NoSQL : plateforme de livraison Redis/MongoDB, deux back-ends comparatifs</li><li>Stage SIAAP : API FastAPI + normalisation données environnementales</li></ul></div>
-        <div class="cp-tags"><span class="cp-tag">Python</span><span class="cp-tag">FastAPI</span><span class="cp-tag">Java</span><span class="cp-tag">PHP</span><span class="cp-tag">JavaScript</span><span class="cp-tag">HTML/CSS</span><span class="cp-tag">Docker</span><span class="cp-tag">TDD/JUnit</span></div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 Modules mobilisés</div><ul class="cp-ul"><li><strong>R5.A.05 (Programmation avancée) :</strong> Backend Java, Servlets, serveurs Tomcat</li><li><strong>R5.A.06 (Programmation multimédia) :</strong> Manipulation d'images bitmap/vectorielles, animations et projet <em>Neon Invasion</em></li><li><strong>R6.A.05 (Développement avancé) :</strong> Programmation Orientée Objet en Python, FastAPI et ORM SQLAlchemy</li><li><strong>SAÉ 5.Real.01 :</strong> Conception et implémentation Flutter de l'application de voyage <em>SerendIA</em></li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Java</span><span class="cp-tag">FastAPI</span><span class="cp-tag">Python (POO)</span><span class="cp-tag">Pygame</span><span class="cp-tag">Flutter</span><span class="cp-tag">Tomcat</span></div>
       </div>
     </div>
 
-    <!-- C2 -->
+    <!-- C2 : OPTIMISER -->
     <div class="comp-panel" id="cp1">
       <div class="cp-inner">
         <div class="cp-top">
-          <div><div class="cp-num">Compétence 02</div><div class="cp-title">Optimiser</div><div class="cp-sub">Proposer des applications informatiques optimisées selon des critères précis</div></div>
-          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div><div class="level-seg"></div></div></div>
+          <div>
+            <div class="cp-num">Compétence 02</div>
+            <div class="cp-title">Optimiser</div>
+            <div class="cp-sub">Proposer des applications informatiques optimisées selon des critères précis</div>
+          </div>
+          <div class="cp-lvl">
+            <div class="cp-lvl-lbl">Moyenne globale : 14,95/20</div>
+            <div class="cp-lvl-lbl" style="color: var(--green); font-weight: 700;">Rang : 2 / 81</div>
+            <div class="level-bar" style="margin-top: 5px;"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div>
+          </div>
         </div>
-        <p class="cp-body">L'optimisation a été centrale dans le choix architectural Redis vs MongoDB : analyser les compromis (latence, cohérence, scalabilité) pour recommander la solution adaptée au contexte. La double culture <strong>mathématiques + informatique</strong> m'a permis d'aborder l'algorithmique avec une vision analytique rigoureuse. En stage SIAAP, la normalisation des données avec Pandas a réduit significativement les temps de traitement, et la conception de la base SQLite pour une migration PostgreSQL m'a sensibilisé à l'optimisation de schémas relationnels.</p>
+        <p class="cp-body">Grâce à mon cursus universitaire en mathématiques (DEUG/L3), l'optimisation algorithmique est l'un de mes plus grands atouts. Le cours de <strong>Qualité algorithmique (R5.A.04)</strong> m'a appris à analyser la complexité temporelle et spatiale, manipuler les fonctions récursives et appliquer le théorème maître. J'applique cette rigueur scientifique à l'aide à la décision (étude des points critiques, matrices hessiennes et recherche d'extremas en R5.A.11) et aux modélisations mathématiques complexes (R5.A.12 : intégrales, séries de Fourier, trigonométrie). La <strong>SAÉ diagramme de Voronoï</strong> (S6.A.01), est un projet en équipe où j'ai pu codé manuellement un algorithme de traitement géométrique avant de mener un audit de performance et de qualité logicielle sur le code produit par 7 IA génératives.</p>
         <div class="cp-2col">
-          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Analyse comparative et choix argumenté de solutions</li><li>Vision mathématique de la complexité algorithmique</li><li>Optimisation de pipelines de traitement de données</li></ul></div>
-          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Approfondir l'optimisation bas niveau (indexing, profiling)</li><li>Formaliser davantage les benchmarks de performances</li><li>Explorer les outils de monitoring en production</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Analyse mathématique de la complexité et application du théorème maître</li><li>Résolution de problèmes d'aide à la décision par modélisations numériques</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Savoir identifier la limite de rentabilité entre l'optimisation mathématique pure et le temps de développement réel</li></ul></div>
         </div>
-        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet NoSQL : benchmark Redis vs MongoDB pour la coordination logistique temps réel</li><li>Stage SIAAP : optimisation des pipelines Pandas, requêtes SQLite → PostgreSQL</li><li>Ressources maths : probabilités, analyse numérique appliquées à l'algorithmique</li></ul></div>
-        <div class="cp-tags"><span class="cp-tag">Algorithmique</span><span class="cp-tag">SQL · PostgreSQL</span><span class="cp-tag">Redis</span><span class="cp-tag">Pandas</span><span class="cp-tag">Analyse numérique</span><span class="cp-tag">Complexité</span></div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 Modules mobilisés</div><ul class="cp-ul"><li><strong>R5.A.04 (Qualité algorithmique) :</strong> Fonctions récursives, calculs de complexité, théorème maître</li><li><strong>R5.A.11 / R5.A.12 :</strong> Méthodes d’optimisation pour l’aide à la décision (matrice hessienne) et modélisations mathématiques</li><li><strong>S6.A.01 (Évolution d'une application) :</strong>Développement d'un algorithme de <em>diagramme de Voronoï</em> et benchmark de code IAGen</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Modélisations mathématiques</span><span class="cp-tag">Complexité</span><span class="cp-tag">Algorithmique</span></div>
       </div>
     </div>
 
-    <!-- C3 -->
+    <!-- C3 : ADMINISTRER -->
     <div class="comp-panel" id="cp2">
       <div class="cp-inner">
         <div class="cp-top">
-          <div><div class="cp-num">Compétence 03</div><div class="cp-title">Administrer</div><div class="cp-sub">Déployer des services dans une architecture réseau</div></div>
-          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div><div class="level-seg"></div></div></div>
+          <div>
+            <div class="cp-num">Compétence 03</div>
+            <div class="cp-title">Administrer</div>
+            <div class="cp-sub">Déployer des services dans une architecture réseau</div>
+          </div>
+          <div class="cp-lvl">
+            <div class="cp-lvl-lbl">Moyenne globale : 16,28/20</div>
+            <div class="cp-lvl-lbl" style="color: var(--green); font-weight: 700;">Rang : 2 / 81</div>
+            <div class="level-bar" style="margin-top: 5px;"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div>
+          </div>
         </div>
-        <p class="cp-body">La conteneurisation avec <strong>Docker</strong> a été un fil conducteur : de la mise en place d'environnements reproductibles pour les projets NoSQL jusqu'au déploiement en stage. La <strong>Nuit de l'Info</strong> (2024 et 2025) a représenté le test le plus intense de déploiement rapide en conditions réelles, avec une équipe d'une vingtaine de personnes. Jenkins, Tomcat et les pipelines CI/CD ont été abordés en cours et partiellement mis en pratique.</p>
+        <p class="cp-body">L'administration système s'est articulée autour de la culture DevOps, de la conteneurisation et du déploiement d'environnements d'exécution isolés. Le cours de <strong>Virtualisation avancée (R5.A.09)</strong> m'a permis d'assimiler l'isolation système (namespaces), l'écriture de Dockerfiles et la création d'images. Ma trace matérielle principale est le <strong>Projet de simulation de livraison NoSQL</strong>, où j'ai personnellement orchestré et lancé l'infrastructure Docker pour déployer et interconnecter les serveurs isolés de Redis et MongoDB.</p>
         <div class="cp-2col">
-          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Conteneurisation Docker, orchestration de services</li><li>Gestion de versions Git/GitHub en contexte professionnel</li><li>Déploiement rapide sous contrainte (Nuit de l'Info)</li></ul></div>
-          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Approfondir CI/CD (Jenkins, pipelines automatisés)</li><li>Renforcer les compétences réseau avancées</li><li>Explorer Kubernetes pour l'orchestration à grande échelle</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Déploiement et orchestration d'infrastructures de bases de données (Docker Compose)</li><li>Compréhension des mécanismes internes de virtualisation (namespaces Linux)</li><li>Création d'images isolées, reproductibles et étanches</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Surveiller l'empilement des couches (layers) pour optimiser le poids des images Docker</li><li>Approfondir l'automatisation avancée des pipelines CI/CD sous Jenkins</li></ul></div>
         </div>
-        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet NoSQL : conteneurisation Docker complète des services Redis et MongoDB</li><li>SAÉ Architecture réseau : configuration de services et protocoles</li><li>Nuit de l'Info 2024 & 2025 : déploiement web en conditions de hackathon nocturne</li></ul></div>
-        <div class="cp-tags"><span class="cp-tag">Docker</span><span class="cp-tag">Jenkins</span><span class="cp-tag">Tomcat</span><span class="cp-tag">Git/GitHub</span><span class="cp-tag">Architecture réseau</span></div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 Modules mobilisés</div><ul class="cp-ul"><li><strong>R5.A.09 (Virtualisation avancée) :</strong> Écosystème Docker, namespaces Linux, Dockerfiles, builds et gestion d'images</li><li><strong>Projet NoSQL (Simulation de livraison) :</strong> Lancement et configuration réseau des serveurs Redis et MongoDB conteneurisés</li><li><strong>R5.A.07 (Automatisation de la chaîne de production) :</strong> Culture DevOps, serveurs Jenkins et pipelines d'intégration continue (CI/CD)</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Docker</span><span class="cp-tag">Docker Compose</span><span class="cp-tag">DevOps</span><span class="cp-tag">Infrastructure</span><span class="cp-tag">Jenkins</span><span class="cp-tag">CI/CD</span><span class="cp-tag">Namespaces</span></div>
       </div>
     </div>
 
-    <!-- C4 -->
+    <!-- C4 : GÉRER -->
     <div class="comp-panel" id="cp3">
       <div class="cp-inner">
         <div class="cp-top">
-          <div><div class="cp-num">Compétence 04</div><div class="cp-title">Gérer</div><div class="cp-sub">Concevoir et gérer des données de l'entreprise</div></div>
-          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div></div>
+          <div>
+            <div class="cp-num">Compétence 04</div>
+            <div class="cp-title">Gérer</div>
+            <div class="cp-sub">Concevoir et gérer des données de l'entreprise</div>
+          </div>
+          <div class="cp-lvl">
+            <div class="cp-lvl-lbl">Moyenne globale : 15,12/20</div>
+            <div class="cp-lvl-lbl" style="color: var(--green); font-weight: 700;">Rang : 4 / 81</div>
+            <div class="level-bar" style="margin-top: 5px;"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div>
+          </div>
         </div>
-        <p class="cp-body">La gestion des données is la compétence que je considère comme mon <strong>point d'excellence</strong>. Du projet NoSQL aux deux stages, j'ai manipulé des données dans des contextes très variés : données environnementales brutes (SIAAP), données de mobilité open data à contrôler (ART), données académiques scientifiques (THALES). La progression est nette : de la gestion de fichiers CSV vers des pipelines de traitement intégrant des <strong>LLMs pour le scoring de conformité</strong>.</p>
+        <p class="cp-body">Cette compétence valide mon aptitude à manipuler la donnée sous toutes ses formes, qu'elle soit relationnelle ou non-relationnelle. Le cours de <strong>Nouveaux paradigmes de base de données (R5.A.10)</strong> m'a permis d'apprendre à concevoir et administrer des architectures NoSQL majeures. J'ai mis en place des mécanismes avancés de communication en temps réel (Pub/Sub avec Redis, Change Streams avec MongoDB) lors du <strong>Projet NoSQL de simulation de livraison de nourriture (type UberEats)</strong>.</p>
         <div class="cp-2col">
-          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Conception de pipelines de données end-to-end</li><li>Maîtrise SQL et NoSQL (PostgreSQL, MongoDB, Redis)</li><li>Visualisation et analyse (Matplotlib, Streamlit)</li></ul></div>
-          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Structurer systématiquement la documentation des schémas</li><li>Approfondir les pratiques de data governance</li><li>Explorer les outils MLOps pour industrialiser les modèles</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Modélisation et requêtage performant sur bases de données orientées documents (MongoDB)</li><li>Mise en cache et patterns de messagerie temps réel (Redis Pub/Sub)</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Assurer une indexation rigoureuse sur MongoDB pour éviter les baisses de performance sur les grosses collections</li></ul></div>
         </div>
-        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Stage SIAAP : normalisation de données env., base SQLite → migration PostgreSQL + API FastAPI</li><li>Stage ART : pipeline de scoring LLM sur données de mobilité open data</li><li>Projet THALES : extraction et analyse de données académiques 6G, dashboard Streamlit</li></ul></div>
-        <div class="cp-tags"><span class="cp-tag">PostgreSQL · SQLite</span><span class="cp-tag">MongoDB</span><span class="cp-tag">Redis</span><span class="cp-tag">Pandas</span><span class="cp-tag">Matplotlib</span><span class="cp-tag">Streamlit</span><span class="cp-tag">Data viz</span></div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 Modules mobilisés</div><ul class="cp-ul"><li><strong>R5.A.10 (Nouveaux paradigmes de base de données) :</strong> Écosystème NoSQL, structures clés-valeurs (Redis) et documentaires (MongoDB)</li><li><strong>Projet NoSQL (Simulation UberEats) :</strong> Développement comparatif des back-ends logistiques et flux transactionnels</li><li><strong>Stages (SIAAP & ART) :</strong> Scripts d'automatisation des pipelines de données (Pandas) et migration SQLite vers PostgreSQL</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">MongoDB</span><span class="cp-tag">Redis Pub/Sub</span><span class="cp-tag">NoSQL</span><span class="cp-tag">PostgreSQL</span><span class="cp-tag">Change Streams</span></div>
       </div>
     </div>
 
-    <!-- C5 -->
+    <!-- C5 : CONDUIRE -->
     <div class="comp-panel" id="cp4">
       <div class="cp-inner">
         <div class="cp-top">
-          <div><div class="cp-num">Compétence 05</div><div class="cp-title">Conduire</div><div class="cp-sub">Satisfaire les besoins des utilisateurs en gérant un projet</div></div>
-          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div></div>
+          <div>
+            <div class="cp-num">Compétence 05</div>
+            <div class="cp-title">Conduire</div>
+            <div class="cp-sub">Satisfaire les besoins des utilisateurs en gérant un projet</div>
+          </div>
+          <div class="cp-lvl">
+            <div class="cp-lvl-lbl">Moyenne globale : 15,09/20</div>
+            <div class="cp-lvl-lbl" style="color: var(--green); font-weight: 700;">Rang : 3 / 81</div>
+            <div class="level-bar" style="margin-top: 5px;"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg"></div></div>
+          </div>
         </div>
-        <p class="cp-body">La conduite de projet a été mise en pratique dès le BUT 1 avec des SAÉ intégrant la méthodologie <strong>Agile</strong>. Le projet THALES (équipe de 4) a exigé une coordination rigoureuse avec un commanditaire industriel, des livrables définis et le respect des délais. La <strong>Nuit de l'Info</strong> représente l'expérience la plus intense : livrer un site fonctionnel en quelques heures avec ~20 personnes requiert organisation, priorisation rapide et communication permanente.</p>
+        <p class="cp-body">La conduite de projet exige d'aligner la rigueur technique avec les impératifs juridiques, économiques et méthodologiques. Le module de <strong>Qualité de développement (R5.A.08)</strong> a posé les bases de mon architecture logicielle (diagrammes de classes, principes SOLID, refactorisation, cycles TDD et tests unitaires JUnit), complété en BUT 3 par le cours de <strong>Maintenance applicative (R6.A.06 : Clean Code)</strong>.Mais tout ne repose pas uniquement sur des compétences informatiques. En effet, nous avons eu des cours de <strong>droit du numérique</strong>, d'<strong>économie durable</strong>, de <strong>management</strong> et une <strong>initiation à l'entrepreneuriat</strong>. Ces enseignements transversaux me permettent d'appréhender un projet dans sa globalité, en couplant la qualité du code au respect des contraintes légales, environnementales et managériales.</p>
         <div class="cp-2col">
-          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Adaptabilité et priorisation sous contrainte de temps</li><li>Maîtrise des sprints Agile en contexte professionnel réel</li><li>Capacité à cadrer les besoins avec des commanditaires</li></ul></div>
-          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Mieux documenter les décisions de conception en cours</li><li>Renforcer la gestion des risques projet en amont</li><li>Structurer les rétrospectives pour capitaliser les acquis</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Application rigoureuse des principes de conception logicielle SOLID et Clean Code</li><li>Maîtrise du cycle de développement piloté par les tests (TDD / JUnit)</li><li>Évaluation des risques juridiques et conformité RGPD / Propriété Intellectuelle</li><li>Vision globale d'un projet (gouvernance, droit, gestion des risques et management)</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Maintenir une documentation technique à jour malgré le rythme soutenu des sprints Agile</li><li>Veiller à ce que les contraintes de gestion administrative ne ralentissent pas le flux de production technique</li></ul></div>
         </div>
-        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet THALES (×4) : coordination équipe, livrables industriels, interface commanditaire</li><li>Nuit de l'Info 2024 & 2025 (×20) : gestion de crise, priorisation extrême</li><li>Stage ART : méthodologie Agile, sprints, réunions de suivi hebdomadaires</li></ul></div>
-        <div class="cp-tags"><span class="cp-tag">Agile · Scrum</span><span class="cp-tag">UML</span><span class="cp-tag">Gestion d'équipe</span><span class="cp-tag">Livrables</span><span class="cp-tag">Pack Office</span></div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 Modules mobilisés</div><ul class="cp-ul"><li><strong>R5.A.08 / R6.A.06 :</strong> Qualité de développement (SOLID, JUnit, TDD, Diagramme de classe) et Maintenance applicative (Clean Code)</li><li><strong>R5.A.13 / R6.02 :</strong> Économie durable et numérique, Droit du numérique et de la propriété intellectuelle</li><li><strong>R5.01 / R6.01 :</strong> Initiation au management d’une équipe de projet informatique et Initiation à l’entrepreneuriat</li><li><strong>SAÉ 5.Real.01 (SerendIA) :</strong> Rédaction du livrable de branding stratégique et commercial</li><li><strong>SAÉ S6 (Phase 3 Audit) :</strong>Analyse des risques juridiques, environnementaux et de souveraineté liés à l'usage d'IA génératives</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Principes SOLID</span><span class="cp-tag">JUnit / TDD</span><span class="cp-tag">Clean Code</span><span class="cp-tag">Droit du numérique</span><span class="cp-tag">Agile</span><span class="cp-tag">Économie durable</span><span class="cp-tag">Management et gestion de projet</span><span class="cp-tag">Entrepreneuriat</span></div>
       </div>
     </div>
 
-    <!-- C6 -->
+    <!-- C6 : COLLABORER -->
     <div class="comp-panel" id="cp5">
       <div class="cp-inner">
         <div class="cp-top">
-          <div><div class="cp-num">Compétence 06</div><div class="cp-title">Collaborer</div><div class="cp-sub">Travailler efficacement dans une équipe informatique</div></div>
-          <div class="cp-lvl"><div class="cp-lvl-lbl">Niveau acquis</div><div class="level-bar"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div></div>
+          <div>
+            <div class="cp-num">Compétence 06</div>
+            <div class="cp-title">Collaborer</div>
+            <div class="cp-sub">Travailler efficacement dans une équipe informatique</div>
+          </div>
+          <div class="cp-lvl">
+            <div class="cp-lvl-lbl">Moyenne globale : 15,90/20</div>
+            <div class="cp-lvl-lbl" style="color: var(--green); font-weight: 700;">Rang : 3 / 81</div>
+            <div class="level-bar" style="margin-top: 5px;"><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div><div class="level-seg on"></div></div>
+          </div>
         </div>
-        <p class="cp-body">La collaboration est une dimension naturelle de mon profil. En équipe de 4 avec THALES, en équipe d'une vingtaine lors des Nuits de l'Info, et en équipe professionnelle lors des deux stages, j'ai démontré une capacité constante à m'intégrer et à maintenir une communication fluide. L'utilisation systématique de <strong>Git/GitHub</strong>, la rédaction de documentation claire et la participation active aux réunions techniques sont mes preuves concrètes.</p>
+        <p class="cp-body">Le travail en équipe informatique demande une communication transparente, de l'empathie et une gestion technique partagée irréprochable. En m'appuyant sur les cours de <strong>Politique de communication (R5.03)</strong> et d'<strong>Organisation et diffusion de l'information (R6.03)</strong>, j'ai développé une posture professionnelle solide. J'ai mis ces acquis en pratique au sein d'un <strong>groupe de 7 personnes</strong> pour SérendIA, lors de mes deux participations consécutives à la <strong>Nuit de l'Info</strong> (équipes de ~20 personnes) en coordonnant la répartition des tâches sur notre dépôt Git commun ou encore lors du travail en équipe pour THALES démontrent ma capacité à collaborer dans une équipe informatique.</p>
         <div class="cp-2col">
-          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Aisance relationnelle en contextes pro et académique</li><li>Documentation soignée comme acte de collaboration</li><li>Adaptabilité dans des équipes de tailles très variées</li></ul></div>
-          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Structurer davantage les revues de code collectives</li><li>Formaliser les conventions de nommage et de branches Git</li><li>Améliorer la gestion des conflits de merge en grande équipe</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title g">✅ Points forts</div><ul class="cp-ul"><li>Aisance relationnelle et gestion de la communication intra-équipe</li><li>Pratique avancée de Git collaboratif (gestion de conflits, code reviews collectives)</li><li>Savoir structurer l'information technique pour des profils non-développeurs</li></ul></div>
+          <div class="cp-box"><div class="cp-box-title o">⚡ Points de vigilance</div><ul class="cp-ul"><li>Veiller à formaliser l'écriture des commits et les conventions de branches dès le départ</li></ul></div>
         </div>
-        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 SAÉ & traces mobilisées</div><ul class="cp-ul"><li>Projet THALES (×4) : collaboration, revues de code, répartition des tâches</li><li>Nuit de l'Info 2024 & 2025 (×20) : coordination intensive sur 10h nocturnes</li><li>Stages SIAAP & ART : intégration équipes, réunions techniques, documentation GitHub</li></ul></div>
-        <div class="cp-tags"><span class="cp-tag">Git/GitHub</span><span class="cp-tag">Documentation</span><span class="cp-tag">Travail en équipe</span><span class="cp-tag">Code review</span><span class="cp-tag">Communication technique</span></div>
+        <div class="cp-box cp-2col full" style="margin-bottom:20px"><div class="cp-box-title b">🎯 Modules mobilisés</div><ul class="cp-ul"><li><strong>R5.03 / R6.03 :</strong> Politique de communication, Organisation et diffusion de l'information</li><li><strong>R5.A.02 / R6.04 :</strong> Projet Personnel et Professionnel (PPP) — Préparation de mon intégration en alternance en école d'ingénieur</li><li><strong>SAÉ 5.Real.01 / SAÉ S6 :</strong> Rapports de communication intra-équipe</li><li><strong>Nuits de l'Info (2024 & 2025) :</strong> Coordination intensive en conditions de hackathon nocturne (10h)</li></ul></div>
+        <div class="cp-tags"><span class="cp-tag">Git Collaboratif</span><span class="cp-tag">Communication</span><span class="cp-tag">Pair Programming</span><span class="cp-tag">Management Agile</span><span class="cp-tag">Hackathon</span></div>
       </div>
     </div>
 
@@ -1515,7 +1718,7 @@ footer {
         </div>
         <div class="proj-ctx">Projet individuel · BUT 3</div>
         <h3 class="proj-title">Neon Invasion</h3>
-        <p class="proj-desc">Jeu de type shoot'em up 2D développé en Python avec Pygame intégrant une architecture orientée objet. Le joueur contrôle un vaisseau, détruit des vagues d'ennemis et collecte des power-ups.</p>
+        <p class="proj-desc">Jeu de type <em>shoot'em up</em> 2D développé en Python avec Pygame dans le cadre du cours de programmation multimédia intégrant une architecture orientée objet.</p>
         <div class="proj-tech">
           <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
         </div>
@@ -1525,27 +1728,46 @@ footer {
       <div class="proj-card reveal">
         <div class="proj-head">
           <div class="proj-icon"></div>
-          <a href="" class="proj-gh" target="_blank" rel="noopener">
+          <a href="https://github.com/lorenzojg/SA-BUT3-5.Real.01-2025-D-veloppement-avanc-" class="proj-gh" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
             GitHub
           </a>
         </div>
-        <div class="proj-img-slot" onclick="window.open('', '_blank')">
-          <img src="assets/" alt="" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        <div class="proj-img-slot" onclick="window.open('https://github.com/lorenzojg/SA-BUT3-5.Real.01-2025-D-veloppement-avanc-/blob/main/assets/images/icon/icon.png?raw=true', '_blank')">
+          <img src="https://github.com/lorenzojg/SA-BUT3-5.Real.01-2025-D-veloppement-avanc-/blob/main/assets/images/icon/icon.png?raw=true" alt="SerendIA" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
         </div>
-        <div class="proj-ctx">Projet en équipe de 4 · Collaboration THALES</div>
-        <h3 class="proj-title">Web scraping & analyse académique 6G (THALES)</h3>
-        <p class="proj-desc">Application d'extraction automatisée et d'analyse de données académiques sur la 6G via l'API Arxiv et des LLMs (Groq). Dashboard interactif de data visualisation et scoring de pertinence des publications scientifiques.</p>
+        <div class="proj-ctx">Projet en équipe de 7 · SAÉ S5 (BUT 3)</div>
+        <h3 class="proj-title">SerendIA — Application de recommandation de voyages</h3>
+        <p class="proj-desc">SérendIA est une application mobile développée en Flutter qui aide les utilisateurs à découvrir leur prochaine destination de voyage idéale. Contrairement aux filtres classiques, Serendia utilise un moteur de recommandation vectoriel qui apprend de vos préférences et de vos interactions en temps réel.
+
+</p>
         <div class="proj-tech">
-          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
-          <span class="tech-badge">Groq API</span>
-          <span class="tech-badge">Arxiv API</span>
-          <span class="tech-img"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/streamlit/streamlit-original.svg" alt="Streamlit" title="Streamlit"></span>
-          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/matplotlib/matplotlib-original.svg" alt="Matplotlib" title="Matplotlib">
-        </div>
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" alt="Flutter" title="Flutter">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg" alt="Android" title="Android Studio">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" alt="Git" title="Git">        </div>
       </div>
 
       <!-- Projet 5 -->
+      <div class="proj-card reveal">
+        <div class="proj-head">
+          <div class="proj-icon"></div>
+          <a href="https://github.com/IoanPV0/SAE-Diagrammes-de-Voronoi_A_B" class="proj-gh" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.1.82-.26.82-.58v-2.02c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.83.57C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+        <div class="proj-img-slot" onclick="window.open('https://github.com/IoanPV0/SAE-Diagrammes-de-Voronoi_A_B', '_blank')">
+          <img src="assets/voronoi.png" alt="Diagramme de Voronoï" style="width:100%; height:180px; object-fit:cover; border-radius:8px; margin-bottom:20px; margin-top:20px;">
+        </div>
+        <div class="proj-ctx">Projet en équipe de 7 · SAÉ S6 (BUT 3)</div>
+        <h3 class="proj-title">Diagrammes de Voronoï & Étude IA génératives</h3>
+        <p class="proj-desc">Développement d'algorithme pour la génération et l'affichage de diagrammes de Voronoï à partir de coordonnées (x,y) lues depuis un fichier texte avec export SVG. Phase d'audit comparative basée sur 7 IA génératives de code (prompts, dette technique, souveraineté). Études des risques de l'IA générative (environnement, sécurité, souveraineté et géopolitique, ...)</p>
+        <div class="proj-tech">
+          <img class="tech-img" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" alt="Python" title="Python">
+        </div>
+      </div>
+
+      <!-- Projet 6 -->
       <div class="proj-card reveal">
         <div class="proj-head">
           <div class="proj-icon"></div>
@@ -1568,7 +1790,7 @@ footer {
         </div>
       </div>
 
-      <!-- Projet 6 -->
+      <!-- Projet 7 -->
       <div class="proj-card reveal">
         <div class="proj-head">
           <div class="proj-icon"></div>
@@ -1603,8 +1825,13 @@ footer {
     <div class="exp-grid">
 
       <div class="exp-card reveal">
-        <div class="exp-type">Stage</div>
-        <div class="exp-org">SIAAP</div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+          <div class="exp-type">Stage BUT 2 (Passerelle TI)</div>
+          <a href="https://www.siaap.fr/le-siaap/missions/presentation/" target="_blank" rel="noopener" title="En savoir plus sur le SIAAP">
+            <img src="assets/logo_siaap.png" alt="Logo SIAAP" style="width: 200px; height: 75px; object-fit: cover; border-radius: 8px; background: #ffffff; padding: 4px; border: 1px solid var(--border);">
+          </a>
+        </div>
+        <div class="exp-org">SIAAP (Syndicat Interdépartemental pour l'Assainissement de l'Agglomération Parisienne)</div>
         <div class="exp-role">Développeur Python & Data</div>
         <div class="exp-period">Juillet – Août 2025 · Colombes (92)</div>
         <ul class="exp-ul">
@@ -1621,16 +1848,21 @@ footer {
       </div>
 
       <div class="exp-card reveal">
-        <div class="exp-type">Stage BUT 3</div>
-        <div class="exp-org">ART</div>
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px;">
+          <div class="exp-type">Stage BUT 3 (Fin de cycle)</div>
+          <a href="https://www.autorite-transports.fr/connaitre-laraf-2/" target="_blank" rel="noopener" title="En savoir plus sur l'ART">
+          <img src="assets/logo_art.png" alt="Logo ART" style="width: 200px; height: 75px; object-fit: contain; border-radius: 8px; background: #ffffff; padding: 4px; border: 1px solid var(--border);">
+          </a>
+        </div>
+        <div class="exp-org">ART (Autorité de Régulation des Transports)</div>
         <div class="exp-role">Développeur Python & LLM</div>
         <div class="exp-period">Avril – Août 2026 · Paris Montparnasse (14e)</div>
         <ul class="exp-ul">
           <li><span class="ar">→</span><span>Automatisation du contrôle de conformité de données de mobilité (open data)</span></li>
-          <li><span class="ar">→</span><span>Intégration d'APIs LLM (GPT, Mistral, Perplexity) dans des pipelines Python</span></li>
+          <li><span class="ar">→</span><span>Intégration d'APIs LLM (GPT, Gemini) dans des pipelines Python</span></li>
           <li><span class="ar">→</span><span>Analyse documentaire et scoring automatisé de conformité réglementaire</span></li>
           <li><span class="ar">→</span><span>Travail en environnement Agile, sprints et livrables définis</span></li>
-          <li><span class="ar">→</span><span>Veille sur les pratiques responsables d'utilisation des LLMs en service public</span></li>
+          <li><span class="ar">→</span><span>Veille sur les réglementations et lois concernant les déclarations de conformité dans le domaine des transports</span></li>
         </ul>
         <div class="exp-comp-tags">
           <span class="exp-comp-tag">Réaliser</span><span class="exp-comp-tag">Gérer</span>
@@ -1641,14 +1873,27 @@ footer {
 
     <div class="bilan-wrap reveal">
       <div class="bilan-hdr">
-        <div class="bilan-hdr-title">Analyse critique — Stage ART (stage BUT 3 principal)</div>
+        <div class="bilan-hdr-title">Analyse critique — Stage ART (BUT 3 - En cours)</div>
         <div class="bilan-hdr-sub">Retour réflexif & auto-évaluation</div>
       </div>
       <div class="bilan-4">
-        <div class="bilan-cell"><div class="bilan-cell-title g">✅ Points forts</div><ul class="bilan-ul"><li>Montée en compétence rapide sur les APIs LLM en contexte réel</li><li>Livraison d'un pipeline fonctionnel en environnement Agile</li><li>Bonne intégration dans l'équipe, participation active</li><li>Application directe des compétences BUT à un problème métier concret</li></ul></div>
-        <div class="bilan-cell"><div class="bilan-cell-title o">⚡ Points de vigilance</div><ul class="bilan-ul"><li>Sous-estimer la complexité des contraintes réglementaires du secteur public</li><li>Ne pas documenter les choix d'architecture dès les premières itérations</li><li>Gérer les limites des LLMs (hallucinations, coût, latence) en contexte critique</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title g">✅ Points forts</div><ul class="bilan-ul"><li>Montée en compétence rapide sur les APIs LLM en contexte réel</li><li>Livraison d'un pipeline fonctionnel</li><li>Bonne intégration dans l'équipe, participation active</li><li>Application directe des compétences BUT à un problème métier concret</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title o">⚡ Points de vigilance</div><ul class="bilan-ul"><li>Complexité des contraintes réglementaires du secteur public des transports</li><li>Gérer les limites des LLMs (hallucinations, coût, latence) en contexte critique</li></ul></div>
         <div class="bilan-cell"><div class="bilan-cell-title b">💡 Bonnes pratiques acquises</div><ul class="bilan-ul"><li>Tester systématiquement les sorties LLM avant intégration dans des pipelines</li><li>Itérer rapidement, documenter chaque version pour faciliter la reprise</li><li>Dialoguer tôt avec les parties prenantes pour aligner technique et métier</li></ul></div>
         <div class="bilan-cell"><div class="bilan-cell-title o">🎯 Si c'était à refaire…</div><ul class="bilan-ul"><li>Établir un benchmark LLM plus tôt pour choisir le modèle le mieux adapté</li><li>Proposer des tests unitaires systématiques dès le démarrage</li><li>S'imprégner plus rapidement du contexte métier (réglementation mobilité)</li></ul></div>
+      </div>
+    </div>
+
+    <div class="bilan-wrap reveal" style="margin-top: 30px;">
+      <div class="bilan-hdr">
+        <div class="bilan-hdr-title">Analyse critique — Stage SIAAP (BUT 2)</div>
+        <div class="bilan-hdr-sub">Retour réflexif sur l'optimisation des flux de données environnementales</div>
+      </div>
+      <div class="bilan-4">
+        <div class="bilan-cell"><div class="bilan-cell-title g">✅ Points forts</div><ul class="bilan-ul"><li>Automatisation complète de scripts de nettoyage de données</li><li>Conception efficace du modèle logique SQLite</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title o">⚡ Points de vigilance</div><ul class="bilan-ul"><li>Anticiper les incohérences de formats dans les fichiers Excel bruts</li><li>Manque de documentation d'architecture au démarrage</li><li>Établir des tests unitaires pour vérifier le bon fonctionnement du traitement des données</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title b">💡 Bonnes surprises & Acquis</div><ul class="bilan-ul"><li>Excellente réactivité de l'API FastAPI</li><li>Apprentissage des contraintes techniques du traitement de l'eau</li></ul></div>
+        <div class="bilan-cell"><div class="bilan-cell-title o">🎯 Si c'était à refaire…</div><ul class="bilan-ul"><li>Établir une architecture plus robuste et implémenter des tests unitaires pour faciliter la maintenance du code</li></ul></div>
       </div>
     </div>
   </div>
@@ -1671,6 +1916,8 @@ footer {
           <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg" alt="HTML5"><span class="skill-name">HTML5</span></div>
           <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg" alt="CSS3"><span class="skill-name">CSS3</span></div>
           <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg" alt="FastAPI"><span class="skill-name">FastAPI</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/flutter/flutter-original.svg" alt="Flutter"><span class="skill-name">Flutter</span></div>
+
         </div>
       </div>
 
@@ -1698,6 +1945,7 @@ footer {
           <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tomcat/tomcat-original.svg" alt="Tomcat"><span class="skill-name">Tomcat</span></div>
           <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" alt="VS Code"><span class="skill-name">VS Code</span></div>
           <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/intellij/intellij-original.svg" alt="IntelliJ"><span class="skill-name">IntelliJ</span></div>
+          <div class="skill-item"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg" alt="Android Studio"><span class="skill-name">Android Studio</span></div> 
         </div>
       </div>
 
@@ -1705,50 +1953,85 @@ footer {
   </div>
 </section>
 
-<!-- ════ CONCLUSION ════ -->
 <section id="conclusion">
   <div class="container">
     <div class="section-label reveal">06 — Synthèse finale</div>
-    <h2 class="section-title reveal">Bilan & perspectives</h2>
+    <h2 class="section-title reveal">Bilan de compétences &<br>Perspectives d'avenir</h2>
     <div class="conclu-grid">
       <div>
         <div class="conclu-quote reveal">
-          « Trois années de BUT m'ont appris que la technique seule ne suffit pas — c'est la capacité à mettre la donnée au service d'un problème réel, en collaboration, qui fait la valeur d'un ingénieur. »
+          « Mon intégration en Passerelle BUT m'a prouvé que la technique seule ne suffit pas — c'est la capacité à mettre la donnée mathématique au service d'un problème informatique réel qui fait la valeur d'un ingénieur. »
         </div>
         <div class="conclu-text reveal">
-          <p>Ce portfolio marque la clôture d'un cycle fondateur. En parcourant les six compétences du référentiel BUT, je mesure le chemin parcouru : d'un étudiant en mathématiques théoriques à un développeur capable de concevoir des <strong>pipelines de données</strong>, d'intégrer des <strong>LLMs dans des systèmes réels</strong>, et de collaborer efficacement dans des environnements professionnels exigeants.</p>
-          <p>Les points forts identifiés : une solide maîtrise de Python et de l'écosystème data, une capacité d'adaptation rapide à de nouveaux contextes métiers, et un relationnel facilitant la collaboration interdisciplinaire. Ma <strong>double culture mathématiques–informatique</strong> constitue un différenciateur réel pour aborder les problématiques d'IA.</p>
-          <p>Les axes de progression me guideront à l'ESIEA : investir davantage dans les tests et la documentation dès le début des projets, approfondir les aspects bas niveau de l'optimisation, et renforcer ma culture <strong>MLOps</strong> pour industrialiser les modèles au-delà du prototype. Ce portfolio n'est pas une fin — c'est la base sur laquelle construire la suite.</p>
+          <p>Ce portfolio marque l'aboutissement de mon cycle de reconversion et de spécialisation au sein du BUT Informatique. En synthétisant mon parcours, je mesure le chemin parcouru : d'un cursus initialement axé sur les mathématiques théoriques à l'Université Sorbonne Paris Nord, mon intégration directe en année Passerelle (BUT 2) m'a permis de devenir un développeur complet, capable de concevoir des <strong>architectures logicielles modernes</strong>, d'automatiser des <strong>pipelines de données complexes</strong> et de piloter des solutions de gestion de données.</p>
+          <p>Mes forces résident dans cette dualité mathématiques-informatique, qui me confère une rigueur analytique unique pour aborder les problématiques d'IA, de structures de données et d'aide à la décision. Mes expériences vécues en entreprise à l'<strong><abbr title="Autorité de Régulation des Transports">ART</abbr></strong> et au <strong><abbr title="Syndicat Interdépartemental pour l'Assainissement de l'Agglomération Parisienne">SIAAP</abbr></strong> ont transformé ces compétences en savoir-faire industriels concrets, m'apprenant à valoriser mon profil au sein d'équipes et de projets aux fortes exigences métiers.</p>
+          <p>Les axes d'amélioration identifiés tout au long de cette auto-évaluation constitueront mon fil conducteur lors de mon cycle d'ingénieur à l'<strong>ESIEA en spécialité Data & Intelligence Artificielle</strong> dès la rentrée 2026. Mon ambition est d'approfondir mes connaissances en machine learning et en algorithmes pour industrialiser les modèles et de systématiser les démarches de tests afin de construire des architectures logicielles éco-responsables, performantes et sécurisées.</p>
         </div>
       </div>
       <div class="conclu-aside">
         <div class="aside-card reveal">
           <div class="aside-title g">Points forts identifiés</div>
           <ul class="aside-ul">
-            <li>Double culture maths / informatique</li>
-            <li>Maîtrise Python & écosystème data end-to-end</li>
-            <li>Expérience LLMs en contexte professionnel (ART)</li>
-            <li>Capacité d'intégration rapide en équipe</li>
-            <li>Rigueur & curiosité intellectuelle</li>
+            <li>Double culture mathématiques / informatique</li>
+            <li>Maîtrise avancée de Python (FastAPI, Pandas, ORM)</li>
+            <li>Ingénierie de pipelines Data et intégration de LLMs</li>
+            <li>Rigueur d'analyse de complexité algorithmique (R5.A.04)</li>
+            <li>Excellents classements officiels sur la promotion</li>
           </ul>
         </div>
         <div class="aside-card reveal">
-          <div class="aside-title o">Axes d'amélioration</div>
+          <div class="aside-title o">Axes de progression</div>
           <ul class="aside-ul">
-            <li>Approfondir CI/CD & pratiques MLOps</li>
-            <li>Tests unitaires systématiques dès le démarrage</li>
-            <li>Documentation d'architecture en temps réel</li>
-            <li>Renforcer le front-end (React, frameworks modernes)</li>
+            <li>Investir le paradigme MLOps pour la mise en production</li>
+            <li>Automatisation systématique des tests unitaires (TDD / JUnit)</li>
+            <li>Maintenir une documentation d'architecture en temps réel</li>
+            <li>Approfondir l'orchestration de conteneurs (Kubernetes)</li>
           </ul>
         </div>
         <div class="aside-card reveal">
-          <div class="aside-title b">Perspectives</div>
+          <div class="aside-title b">Perspectives 2026-2029</div>
           <ul class="aside-ul">
-            <li>ESIEA — Ingénieur Data & IA (alternance 2026)</li>
-            <li>IA appliquée : mobilité, environnement, conformité</li>
-            <li>Contribuer à des projets IA à fort impact métier</li>
+            <li>Cycle d'ingénieur Data & IA à l'ESIEA</li>
+            <li>Recherche active d'une alternance de 3 ans</li>
+            <li>Spécialisation dans les systèmes d'IA d'intérêt général</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT & CV ════ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label reveal">07 — Une opportunité ?</div>
+    <h2 class="section-title reveal">Restons en contact</h2>
+    
+    <div class="contact-wrapper reveal">
+      <p class="contact-desc">
+        Actuellement admis à l'<strong>ESIEA</strong> pour la rentrée 2026, je suis activement à la recherche d'une <strong>alternance de 3 ans</strong> pour accompagner mon cycle d'ingénieur. Si mon profil retient votre attention, discutons-en !
+      </p>
+
+      <!-- Bouton de téléchargement du CV -->
+      <div style="margin-bottom: 40px;">
+        <a href="assets/RaziHadjAmor_CV_Alternance.pdf" class="btn btn-cv" download="CV_Razi_HADJ_AMOR.pdf">
+          <span>📄 Télécharger mon CV</span>
+        </a>
+      </div>
+
+      <div style="border-top: 1px solid var(--border); margin: 30px 0;"></div>
+
+      <!-- Grille des réseaux et mails -->
+      <div class="contact-grid">
+        <a href="mailto:razi.hadjamor@gmail.com" class="btn btn-outline btn-contact-icon" style="border-radius: 50px;">
+          <svg viewBox="0 0 24 24"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/razi-hadjamor/" target="_blank" rel="noopener" class="btn btn-outline btn-contact-icon" aria-label="LinkedIn" style="border-radius: 50px;">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="https://github.com/RaziHadjAmor" target="_blank" rel="noopener" class="btn btn-outline btn-contact-icon" aria-label="GitHub" style="border-radius: 50px;">
+          <svg viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.8 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -1757,17 +2040,16 @@ footer {
 <!-- ════ FOOTER ════ -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-brand">portfolio<span>.</span>but3</div>
+    <div class="footer-brand">portfolio<span>.</span>Razi</div>
     <div class="footer-meta">
-      BUT 3 Informatique — USPN · IUT de Villetaneuse<br>
-      Cours Communication & Projet Professionnel · Remis le 14 juin 2026
+      Tout droits réservés © 2026
     </div>
   </div>
 </footer>
 
 <script>
 /* ══════════════════════════════════════════
-   PERSONNALISATION — À MODIFIER
+   PERSONNALISATION
 ══════════════════════════════════════════ */
 const HERO_NAME = "Razi HADJ AMOR";
 const HERO_ROLE = "Étudiant en BUT3 Informatique";
@@ -1944,9 +2226,38 @@ window.addEventListener('scroll', () => {
   });
 }, { passive: true });
 
-function alertImg() {
-  alert('💡 Pour ajouter une image, remplacez ce bloc par :\n\n<img src="votre-capture.png" alt="..." style="width:100%; height:130px; object-fit:cover; border-radius:8px; margin-bottom:20px;">');
+/* ══════════════════════════════════════════
+   GÉNÉRATEUR D'ÉTOILES FILANTES ALÉATOIRES
+══════════════════════════════════════════ */
+const sStar = document.getElementById('shootingStar');
+
+function triggerShootingStar() {
+  // On ne lance l'étoile que si le mode nuit est actif (data-theme = dark)
+  if (document.documentElement.getAttribute('data-theme') === 'dark' && sStar) {
+    
+    // 1. Position horizontale aléatoire (ex: entre 30% et 90% de la largeur de l'écran)
+    const randomLeft = Math.floor(Math.random() * 80) + 10; 
+    
+    // 2. Hauteur contrôlée : restreinte entre 5% et 18% pour rester toujours en haut du ciel
+    const randomTop = Math.floor(Math.random() * 13) + 5; 
+    
+    // Appliquer les coordonnées à l'étoile
+    sStar.style.left = randomLeft + '%';
+    sStar.style.top = randomTop + '%';
+    
+    // Déclencher l'animation CSS
+    sStar.style.animation = 'shootAnimation 2s ease-in-out forwards';
+    
+    // Nettoyer l'animation après exécution pour pouvoir la relancer
+    setTimeout(() => {
+      sStar.style.animation = 'none';
+    }, 700);
+  }
 }
+
+// Tente de lancer une étoile filante toutes les 3 et 4 secondes
+setInterval(triggerShootingStar, 3000);
+setInterval(triggerShootingStar, 4000);
 </script>
 </body>
 </html>
